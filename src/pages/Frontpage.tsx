@@ -8,7 +8,7 @@ import PodcastCard from "../components/PodcastCard";
 import AuthorCard from "../components/AuthorCard";
 import AuthorsSectionHeader from "../components/AuthorsSectionHeader";
 import Footer from "../components/Footer";
-
+import Sidebar from "../components/Sidebar";
 import ArtLogo from "../assets/Art.svg";
 
 import { articleImages } from "../data/articles";
@@ -17,27 +17,43 @@ import { authors } from "../data/authors";
 
 const Frontpage = () => {
   return (
-    <div className="max-w-[1680px] mx-auto">
+    <div className="mx-auto">
       <Navbar />
       <Header header={ArtLogo} />
       <Newsline />
       <Hero />
 
-      {articleImages.map((image, index) => {
-        return (
-          <Article
-            key={index}
-            imageSrc={image}
-            title="Hope dies last"
-            description="Lorem ipsum dolor sit amet..."
-            author="Jakob Gronberg"
-            date="16. March 2022"
-            readTime="1 Min"
-            label="ART"
-          />
-        );
-      })}
+      <div className="max-w-[1680px] mx-auto flex flex-col lg:flex-row gap-12 px-6">
+        {/* Статті */}
+        <div className="flex-1">
+          {articleImages.map((image, index) => (
+            <Article
+              key={index}
+              imageSrc={image}
+              title="Hope dies last"
+              description="Lorem ipsum dolor sit amet..."
+              author="Jakob Gronberg"
+              date="16. March 2022"
+              readTime="1 Min"
+              label="ART"
+            />
+          ))}
+          <div className="flex justify-start px-6 mt-6">
+            <a
+              href="/articles"
+              className="group inline-flex items-center gap-2 text-base font-semibold uppercase text-black transition-colors duration-300 hover:text-neutral-700"
+            >
+              All Articles
+              <span className="inline-block text-xl transform transition-transform duration-300 group-hover:translate-x-1.5">
+                →
+              </span>
+            </a>
+          </div>
+        </div>
 
+        {/* Sidebar */}
+        <Sidebar />
+      </div>
       <div className="h-[100px]"></div>
       <PodcastSectionHeader />
 
