@@ -30,6 +30,7 @@ const PodcastCard: React.FC<PodcastCardProps> = ({
           <span>
             <strong>Duration</strong> {duration}
           </span>
+          <span className="hidden">{episode}</span>
         </div>
       </div>
     </div>
