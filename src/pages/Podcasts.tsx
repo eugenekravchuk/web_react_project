@@ -13,13 +13,14 @@ const Podcasts = () => {
       <Navbar />
       <Header header={PodcastLogo} />
 
-      <div className="h-[100px]"></div>
-
-      <div className="max-w-[1680px] mx-auto px-6 py-12 flex flex-col gap-6">
+      <div className="max-w-[1680px] mx-auto px-6 py-12 flex flex-col gap-6 mb-40 mt-14">
         {podcasts.map((podcast) => (
-          <Link to="/podcasts/1">
+          <Link
+            key={podcast.episode}
+            to={`/podcasts/${podcast.episode}`}
+            className="block"
+          >
             <PodcastRow
-              key={podcast.episode}
               imageSrc={podcast.imageSrc}
               episode={podcast.episode}
               title={podcast.title}
@@ -29,8 +30,6 @@ const Podcasts = () => {
           </Link>
         ))}
       </div>
-
-      <div className="h-[100px]"></div>
       <Footer />
     </div>
   );
