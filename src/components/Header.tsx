@@ -6,7 +6,7 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = ({ header }) => {
   return (
-    <header className="py-12 px-6">
+    <header className="py-12 px-6 flex justify-center">
       <img src={header} alt="Header logo" />
     </header>
   );

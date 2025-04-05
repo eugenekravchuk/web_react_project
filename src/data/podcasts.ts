@@ -1,6 +1,6 @@
-import podcast1 from "../assets/podcasts/podcast1.png";
-import podcast2 from "../assets/podcasts/podcast2.png";
-import podcast3 from "../assets/podcasts/podcast3.png";
+import podcast1 from "../assets/podcasts/podcast-1.png";
+import podcast2 from "../assets/podcasts/podcast-2.png";
+import podcast3 from "../assets/podcasts/podcast-3.png";
 
 export const podcasts = [
   {
