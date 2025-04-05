@@ -1,4 +1,3 @@
-import React from "react";
 import Insta from "../assets/ri_instagram-line.png";
 import YouTube from "../assets/ri_youtube-fill.png";
 import Twitter from "../assets/ri_twitter-fill.png";
@@ -44,7 +43,7 @@ const Footer = () => {
           </div>
 
           {/* Center: Navigation */}
-          <div className="col-span-3 grid grid-cols-3 gap-8 text-sm text-gray-300 mt-10 text-base">
+          <div className="col-span-3 grid grid-cols-3 gap-8 text-gray-300 mt-10 text-base">
             <ul className="space-y-1">
               <li>
                 <a href="#" className="block mb-3">
