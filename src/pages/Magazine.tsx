@@ -1,13 +1,11 @@
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
-import PodcastSectionHeader from "../components/PodcastSectionHeader";
 import Footer from "../components/Footer";
 import MagazineLogo from "../assets/headers/Magazine.svg";
 
 import { articleImages } from "../data/articles";
 import { useState } from "react";
 import ArticleCard from "../components/ArticleCard";
-import Article from "../components/Article";
 
 const categories = ["ALL", "ART", "STREET ART", "SCULPTURES"];
 
