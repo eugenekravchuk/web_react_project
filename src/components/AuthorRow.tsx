@@ -11,36 +11,45 @@ type AuthorRowProps = {
 
 const AuthorRow: React.FC<AuthorRowProps> = ({ imageSrc, name, job, city }) => {
   return (
-    <div className="w-full border-b px-6 py-10">
-      <div className="flex items-center justify-between gap-4">
+    <Link
+      to="/authors/slug"
+      className="block w-full border-b px-6 py-8 transition-all duration-200 group"
+    >
+      <div className="flex items-center justify-between">
+        {/* Ліва частина — аватар + ім'я */}
         <div className="flex items-center gap-4">
-          <img
-            src={imageSrc}
-            alt={name}
-            className="w-20 h-20 rounded-full object-cover"
-          />
-          <span className="text-base font-bold text-black">{name}</span>
+          <div className="w-20 h-20 rounded-full overflow-hidden">
+            <img
+              src={imageSrc}
+              alt={name}
+              className="w-full h-full object-cover transition-transform duration-300 transform-gpu group-hover:scale-105"
+              style={{ willChange: "transform" }}
+            />
+          </div>
+          <span className="text-lg font-semibold text-black transition-all duration-200 group-hover:underline">
+            {name}
+          </span>
         </div>
 
-        <div className="flex items-center gap-6 text-sm text-zinc-500">
-          <div>
+        {/* Права частина — три фіксовані колонки */}
+        <div
+          className="grid grid-cols-3 gap-10 text-sm text-zinc-500"
+          style={{ minWidth: '320px' }}
+        >
+          <div className="w-24">
             <span className="font-semibold text-black mr-1">Job</span>
             {job}
           </div>
-          <div>
+          <div className="w-24">
             <span className="font-semibold text-black mr-1">City</span>
             {city}
           </div>
+          <div className="w-24 flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-black transition-transform duration-200 group-hover:translate-x-1">
+            About <ArrowRight size={14} />
+          </div>
         </div>
-
-        <Link
-          to="/authors/slug"
-          className="flex items-center gap-1 text-xs font-bold uppercase tracking-wide hover:translate-x-1 transition"
-        >
-          About <ArrowRight size={14} />
-        </Link>
       </div>
-    </div>
+    </Link>
   );
 };
 

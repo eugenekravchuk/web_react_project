@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { Link } from "react-router-dom";
 
 import Insta from "../assets/ri_instagram-line.svg";
 import YouTube from "../assets/ri_youtube-fill.svg";
@@ -15,24 +16,28 @@ const articles = [
     date: "16. March 2022",
     readTime: "10 Min",
     image: articleImages[0],
+    slug: 'article1'
   },
   {
     title: "An indestructible hope",
     date: "16. March 2022",
     readTime: "10 Min",
     image: articleImages[1],
+    slug: 'article2'
   },
   {
     title: "The chains of our lives",
     date: "16. March 2022",
     readTime: "10 Min",
     image: articleImages[2],
+    slug: 'article3'
   },
   {
     title: "Keep on smiling",
     date: "16. March 2022",
     readTime: "10 Min",
     image: articleImages[3],
+    slug: 'article4'
   },
 ];
 
@@ -118,7 +123,7 @@ const AuthorPage = () => {
 
       <div className="h-[100px]"></div>
 
-      <section className="max-w-6xl mx-auto px-6 py-12 border-t">
+      <section className="max-w-[1680px] mx-auto px-6 py-12 border-t">
         <h2 className="text-3xl md:text-4xl font-bold mb-10">
           Articles by Louise Jensen
         </h2>
@@ -129,11 +134,11 @@ const AuthorPage = () => {
             const noRight = idx === 0 || idx === 2;
 
             return (
-              <div
+              <Link
+                to={`/articles/${article.slug}`}
                 key={idx}
                 className={`
-            flex items-center gap-6 p-6 border
-            border-black border-opacity-20
+            flex items-center gap-6 p-6 border border-black border-opacity-20 transition group
             ${noRight ? "border-r-0" : ""}
             ${noBottom ? "border-b-0" : ""}
           `}
@@ -144,7 +149,9 @@ const AuthorPage = () => {
                   className="w-24 h-24 object-cover"
                 />
                 <div>
-                  <h3 className="font-bold text-lg mb-1">{article.title}</h3>
+                  <h3 className="font-bold text-lg mb-1 transition group-hover:underline">
+                    {article.title}
+                  </h3>
                   <div className="text-sm text-zinc-600">
                     <span className="font-semibold mr-1">Date</span>
                     {article.date}
@@ -153,13 +160,11 @@ const AuthorPage = () => {
                     {article.readTime}
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
       </section>
-
-      <div className="h-[50px]"></div>
 
       <Footer />
     </div>
