@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 type AuthorRowProps = {
   imageSrc: string;
@@ -32,12 +33,12 @@ const AuthorRow: React.FC<AuthorRowProps> = ({ imageSrc, name, job, city }) => {
           </div>
         </div>
 
-        <a
-          href="/about"
+        <Link
+          to="/authors/slug"
           className="flex items-center gap-1 text-xs font-bold uppercase tracking-wide hover:translate-x-1 transition"
         >
           About <ArrowRight size={14} />
-        </a>
+        </Link>
       </div>
     </div>
   );
