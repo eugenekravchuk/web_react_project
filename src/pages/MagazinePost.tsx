@@ -34,8 +34,8 @@ const MagazinePost = () => {
           </h1>
         </div>
 
-        <section className="w-full py-12">
-          <div className="max-w-6xl grid grid-cols-1 md:grid-cols-2  items-center">
+        <section className="w-full py-12 bg-white">
+          <div className="flex flex-col md:flex-row justify-between items-start w-full max-w-[1680px] mx-auto px-0 gap-12">
             {/* Left: Title */}
             <div>
               <h1 className="text-6xl md:text-7xl font-black leading-tight tracking-tight">
@@ -46,7 +46,7 @@ const MagazinePost = () => {
             </div>
 
             {/* Right: Description */}
-            <div className="text-gray-800 text-base leading-relaxed">
+            <div className="text-black text-base leading-relaxed md:max-w-[50%]">
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -226,19 +226,20 @@ const MagazinePost = () => {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l">
           {articleImages.slice(0, 3).map((image, index) => (
-            <ArticleCard
-              key={index}
-              imageSrc={image}
-              title="Hope dies last"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus ultrices metus, vitae laoreet turpis tristique eu. In in quam in sem aliquam sagittis. Aliquam facilisis erat nibh, nec facilisis ex pellentesque quis. Nam semper ac nisl iaculis sagittis. Suspendisse malesuada, dolor eget rutrum consectetur, tellus eros pulvinar nulla, eget ullamcorper urna tellus nec nisi. In ut justo nibh. Fusce aliquet, ex condimentum molestie dapibus,"
-              author="Jakob Gronberg"
-              date="16 March 2022"
-              readTime="1 Min"
-              label="ART"
-              slug="some"
-            />
+            <div key={index} className="border-b border-r">
+              <ArticleCard
+                imageSrc={image}
+                title="Hope dies last"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus ultrices metus, vitae laoreet turpis tristique eu. In in quam in sem aliquam sagittis. Aliquam facilisis erat nibh, nec facilisis ex pellentesque quis. Nam semper ac nisl iaculis sagittis. Suspendisse malesuada, dolor eget rutrum consectetur, tellus eros pulvinar nulla, eget ullamcorper urna tellus nec nisi. In ut justo nibh. Fusce aliquet, ex condimentum molestie dapibus,"
+                author="Jakob Gronberg"
+                date="16 March 2022"
+                readTime="1 Min"
+                label="ART"
+                slug="some"
+              />
+            </div>
           ))}
         </div>
       </div>
