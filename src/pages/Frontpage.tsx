@@ -36,6 +36,7 @@ const Frontpage = () => {
               date="16. March 2022"
               readTime="1 Min"
               label="ART"
+              slug="something"
             />
           ))}
           <div className="flex justify-start px-6 mt-6">

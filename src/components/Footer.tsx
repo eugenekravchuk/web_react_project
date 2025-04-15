@@ -1,4 +1,3 @@
-import React from "react";
 import Insta from "../assets/ri_instagram-line.png";
 import YouTube from "../assets/ri_youtube-fill.png";
 import Twitter from "../assets/ri_twitter-fill.png";
