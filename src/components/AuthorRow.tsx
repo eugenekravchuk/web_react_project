@@ -7,12 +7,13 @@ type AuthorRowProps = {
   name: string;
   job: string;
   city: string;
+  id: string;
 };
 
-const AuthorRow: React.FC<AuthorRowProps> = ({ imageSrc, name, job, city }) => {
+const AuthorRow: React.FC<AuthorRowProps> = ({ imageSrc, name, job, city, id }) => {
   return (
     <Link
-      to="/authors/slug"
+      to={`/authors/${id}`}
       className="block w-full border-b px-6 py-8 transition-all duration-200 group"
     >
       <div className="flex items-center justify-between">
