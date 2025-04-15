@@ -1,6 +1,5 @@
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
-import Newsline from "../components/Newsline";
 import Hero from "../components/Hero";
 import Article from "../components/Article";
 import PodcastSectionHeader from "../components/PodcastSectionHeader";
@@ -9,11 +8,12 @@ import AuthorCard from "../components/AuthorCard";
 import AuthorsSectionHeader from "../components/AuthorsSectionHeader";
 import Footer from "../components/Footer";
 import Sidebar from "../components/Sidebar";
-import ArtLogo from "../assets/Art.svg";
+import ArtLogo from "../assets/headers/Art.svg";
 
 import { articleImages } from "../data/articles";
 import { podcasts } from "../data/podcasts";
 import { authors } from "../data/authors";
+import Newsline from "../components/Newsline";
 
 const Frontpage = () => {
   return (
@@ -36,7 +36,7 @@ const Frontpage = () => {
               date="16. March 2022"
               readTime="1 Min"
               label="ART"
-              slug="something"
+              slug="some"
             />
           ))}
           <div className="flex justify-start px-6 mt-6">

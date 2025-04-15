@@ -64,7 +64,6 @@ const Article: React.FC<ArticleProps> = ({
         </div>
       </div>
     </a>
-    
   );
 };
 

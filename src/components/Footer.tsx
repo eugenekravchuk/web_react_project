@@ -27,9 +27,9 @@ const Footer = () => {
               placeholder="Email"
               className="bg-white flex-grow px-4 py-2 text-black mr-2"
             />
-          <button className="px-4 py-2 self-end bg-white text-black text-sm font-bold transition duration-200 border border-white hover:bg-transparent hover:text-white cursor-pointer">
-            SIGN UP
-          </button>
+            <button className="px-4 py-2 self-end bg-white text-black text-sm font-bold transition duration-200 border border-white hover:bg-transparent hover:text-white cursor-pointer">
+              SIGN UP
+            </button>
           </form>
         </div>
       </div>
@@ -43,21 +43,57 @@ const Footer = () => {
           </div>
 
           {/* Center: Navigation */}
-          <div className="col-span-3 grid grid-cols-3 gap-8 text-sm text-gray-300 mt-10 text-base">
+          <div className="col-span-3 grid grid-cols-3 gap-8 text-gray-300 mt-10 text-base">
             <ul className="space-y-1">
-              <li><a href="#" className="block mb-3">Art</a></li>
-              <li><a href="#" className="block mb-3">Design</a></li>
-              <li><a href="#" className="block mb-3">Architecture</a></li>
+              <li>
+                <a href="#" className="block mb-3">
+                  Art
+                </a>
+              </li>
+              <li>
+                <a href="#" className="block mb-3">
+                  Design
+                </a>
+              </li>
+              <li>
+                <a href="#" className="block mb-3">
+                  Architecture
+                </a>
+              </li>
             </ul>
             <ul className="space-y-1">
-              <li><a href="#" className="block mb-3">Magazine</a></li>
-              <li><a href="#" className="block mb-3">Podcast</a></li>
-              <li><a href="#" className="block mb-3">Authors</a></li>
+              <li>
+                <a href="#" className="block mb-3">
+                  Magazine
+                </a>
+              </li>
+              <li>
+                <a href="#" className="block mb-3">
+                  Podcast
+                </a>
+              </li>
+              <li>
+                <a href="#" className="block mb-3">
+                  Authors
+                </a>
+              </li>
             </ul>
             <ul className="space-y-1">
-              <li><a href="#" className="block mb-3">Styleguide</a></li>
-              <li><a href="#" className="block mb-3">Licensing</a></li>
-              <li><a href="#" className="block mb-3">Changelog</a></li>
+              <li>
+                <a href="#" className="block mb-3">
+                  Styleguide
+                </a>
+              </li>
+              <li>
+                <a href="#" className="block mb-3">
+                  Licensing
+                </a>
+              </li>
+              <li>
+                <a href="#" className="block mb-3">
+                  Changelog
+                </a>
+              </li>
             </ul>
           </div>
         </div>

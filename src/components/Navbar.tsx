@@ -1,20 +1,24 @@
 import Insta from "../assets/ri_instagram-line.svg";
 import YouTube from "../assets/ri_youtube-fill.svg";
 import Twitter from "../assets/ri_twitter-fill.svg";
-
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <nav className="max-w-[1680px] mx-auto flex justify-between items-center border-b px-6 py-4">
-      <div className="font-bold text-sm">FYRRE MAGAZINE</div>
+      <Link to="/" className="font-bold text-sm">
+        FYRRE MAGAZINE
+      </Link>
       <div className="flex gap-6 items-center text-sm text-gray-700">
-        <a href="#">Magazine</a>
-        <a href="#">Authors</a>
-        <a href="#">Podcast</a>
+        <Link to="/magazine">Magazine</Link>
+        <Link to="/authors">Authors</Link>
+        <Link to="/podcasts">Podcasts</Link>
         <span className="text-gray-400">—</span>
         <div className="flex gap-4 text-xl">
           <a href="#">
-            <i><img src={Insta} className="fab fa-instagram" alt="" /></i>
+            <i>
+              <img src={Insta} className="fab fa-instagram" alt="" />
+            </i>
           </a>
           <a href="#">
             <img src={YouTube} className="fab fa-youtube" alt="" />
