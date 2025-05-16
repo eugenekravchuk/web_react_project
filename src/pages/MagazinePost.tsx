@@ -19,6 +19,12 @@ interface Article {
   date: string;
   readTime: string;
   label: string;
+  bold_info1: string;
+  bold_info2: string;
+  info1: string;
+  info2: string;
+  quote: string;
+  quote_author: string;
 }
 
 const MagazinePost = () => {
@@ -30,7 +36,10 @@ const MagazinePost = () => {
 
   useEffect(() => {
     const fetchArticle = async () => {
-      const q = query(collection(db, "articles"), where("id", "==", Number(slug)));
+      const q = query(
+        collection(db, "articles"),
+        where("id", "==", Number(slug))
+      );
       const querySnapshot = await getDocs(q);
       if (!querySnapshot.empty) {
         const data = querySnapshot.docs[0].data() as Article;
@@ -79,7 +88,6 @@ const MagazinePost = () => {
           </h1>
         </div>
 
-        {/* Hero Title + Description */}
         <section className="w-full py-12 bg-white">
           <div className="flex flex-col md:flex-row justify-between items-start gap-12 max-w-[1680px] mx-auto">
             <div>
@@ -93,7 +101,6 @@ const MagazinePost = () => {
           </div>
         </section>
 
-        {/* Metadata */}
         <div className="flex items-center justify-between flex-wrap gap-4 py-4 px-6">
           <div className="flex flex-wrap gap-x-6 text-sm text-black">
             <span>
@@ -113,12 +120,13 @@ const MagazinePost = () => {
           </div>
         </div>
 
-        {/* Big Image */}
         <div className="w-full">
-          <img src={article.imageSrc} className="w-full h-[800px] object-cover" />
+          <img
+            src={article.imageSrc}
+            className="w-full h-[800px] object-cover"
+          />
         </div>
 
-        {/* Author Card + Content */}
         <section className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-10">
           <aside className="w-full max-w-xs p-6 rounded-md text-center">
             <h2 className="text-3xl font-bold">{article.author}</h2>
@@ -135,96 +143,32 @@ const MagazinePost = () => {
               <div className="flex justify-between items-center">
                 <span className="font-semibold">Share</span>
                 <div className="flex gap-4">
-                  <a href="#"><img src={Insta} alt="Insta" /></a>
-                  <a href="#"><img src={YouTube} alt="YouTube" /></a>
-                  <a href="#"><img src={Twitter} alt="Twitter" /></a>
+                  <a href="#">
+                    <img src={Insta} alt="Insta" />
+                  </a>
+                  <a href="#">
+                    <img src={YouTube} alt="YouTube" />
+                  </a>
+                  <a href="#">
+                    <img src={Twitter} alt="Twitter" />
+                  </a>
                 </div>
               </div>
             </div>
           </aside>
 
           <article className="md:col-span-3 text-base text-gray-800 space-y-6 leading-relaxed">
-          <p className="font-semibold">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Egestas dui id ornare arcu odio ut sem. Cras ornare arcu dui
-              vivamus arcu felis bibendum ut. Porttitor leo a diam.
-            </p>
-
-            <p>
-              Porttitor rhoncus dolor purus non enim praesent elementum. Eget
-              dolor morbi non arcu risus quis varius. Posuere ac ut consequat
-              semper viverra nam libero. In ornare quam viverra orci sagittis
-              eu. Tristique risus nec feugiat in fermentum posuere urna nec.
-              Tempus quam pellentesque nec nam aliquam sem et. Convallis a cras
-              semper auctor neque vitae tempus quam pellentesque. Sollicitudin
-              ac orci phasellus egestas tellus rutrum tellus pellentesque. Sed
-              egestas egestas fringilla phasellus faucibus scelerisque eleifend
-              donec pretium. Sit amet porttitor eget dolor morbi non arcu risus.
-              Justo eget magna fermentum iaculis eu non diam phasellus. Sit amet
-              luctus venenatis lectus magna fringilla. Neque vitae tempus quam
-              pellentesque nec nam.
-            </p>
-
-            <p>
-              Porttitor rhoncus dolor purus non enim praesent elementum. Eget
-              dolor morbi non arcu risus quis varius. Posuere ac ut consequat
-              semper viverra nam libero. In ornare quam viverra orci sagittis
-              eu. Tristique risus nec feugiat in fermentum posuere urna nec.
-              Tempus quam pellentesque nec nam aliquam sem et. Convallis a cras
-              semper auctor neque vitae tempus quam pellentesque. Sollicitudin
-              ac orci phasellus egestas tellus rutrum tellus pellentesque. Sed
-              egestas egestas fringilla phasellus faucibus scelerisque eleifend
-              donec pretium. Sit amet porttitor eget dolor morbi non arcu risus.
-              Justo eget magna fermentum iaculis eu non diam phasellus. Sit amet
-              luctus venenatis lectus magna fringilla. Neque vitae tempus quam
-              pellentesque nec nam.
-            </p>
+            <p className="font-semibold">{article.bold_info1}</p>
+            <p>{article.info1}</p>
+            <p>{article.info2}</p>
+            <p className="font-semibold">{article.bold_info2}</p>
 
             <blockquote className="border-l-4 border-black pl-6 py-4 text-xl font-semibold italic text-gray-900">
-              “The greatest glory in living lies not in never falling, but in
-              rising every time we fall.”
+              {article.quote}
               <div className="mt-2 text-sm not-italic text-gray-600">
-                – Nelson Mandela
+                – {article.quote_author}
               </div>
             </blockquote>
-
-            <p className="font-semibold">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Egestas dui id ornare arcu odio ut sem. Cras ornare arcu dui
-              vivamus arcu felis bibendum ut. Porttitor leo a diam.
-            </p>
-
-            <p>
-              Porttitor rhoncus dolor purus non enim praesent elementum. Eget
-              dolor morbi non arcu risus quis varius. Posuere ac ut consequat
-              semper viverra nam libero. In ornare quam viverra orci sagittis
-              eu. Tristique risus nec feugiat in fermentum posuere urna nec.
-              Tempus quam pellentesque nec nam aliquam sem et. Convallis a cras
-              semper auctor neque vitae tempus quam pellentesque. Sollicitudin
-              ac orci phasellus egestas tellus rutrum tellus pellentesque. Sed
-              egestas egestas fringilla phasellus faucibus scelerisque eleifend
-              donec pretium. Sit amet porttitor eget dolor morbi non arcu risus.
-              Justo eget magna fermentum iaculis eu non diam phasellus. Sit amet
-              luctus venenatis lectus magna fringilla. Neque vitae tempus quam
-              pellentesque nec nam.
-            </p>
-
-            <p>
-              Porttitor rhoncus dolor purus non enim praesent elementum. Eget
-              dolor morbi non arcu risus quis varius. Posuere ac ut consequat
-              semper viverra nam libero. In ornare quam viverra orci sagittis
-              eu. Tristique risus nec feugiat in fermentum posuere urna nec.
-              Tempus quam pellentesque nec nam aliquam sem et. Convallis a cras
-              semper auctor neque vitae tempus quam pellentesque. Sollicitudin
-              ac orci phasellus egestas tellus rutrum tellus pellentesque. Sed
-              egestas egestas fringilla phasellus faucibus scelerisque eleifend
-              donec pretium. Sit amet porttitor eget dolor morbi non arcu risus.
-              Justo eget magna fermentum iaculis eu non diam phasellus. Sit amet
-              luctus venenatis lectus magna fringilla. Neque vitae tempus quam
-              pellentesque nec nam.
-            </p>
           </article>
         </section>
       </div>
