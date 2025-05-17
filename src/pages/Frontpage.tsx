@@ -14,6 +14,7 @@ import AuthorCard from "../components/AuthorCard";
 import Footer from "../components/Footer";
 import Sidebar from "../components/Sidebar";
 import Newsline from "../components/Newsline";
+import { Link } from "react-router-dom";
 
 import ArtLogo from "../assets/headers/Art.svg";
 
@@ -92,7 +93,9 @@ const Frontpage = () => {
       <PodcastSectionHeader />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 max-w-[1680px] mx-auto">
         {podcasts.map((podcast, index) => (
-          <PodcastCard key={index} {...podcast} />
+          <Link to={`/podcasts/${podcast.episode}`}>
+            <PodcastCard key={index} {...podcast} />
+          </Link>
         ))}
       </div>
 
@@ -102,7 +105,9 @@ const Frontpage = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 border divide-y md:divide-y-0 md:divide-x max-w-[1680px] mx-auto">
         {authors.map((author, index) => (
           <div key={index} className="divide-y">
-            <AuthorCard {...author} />
+            <Link to={`/authors/${author.id}`}>
+              <AuthorCard {...author} />
+            </Link>
           </div>
         ))}
       </div>
