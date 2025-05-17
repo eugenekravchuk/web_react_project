@@ -6,6 +6,7 @@ import { AuthorType } from "../data/types";
 import { db } from "../data/firebase";
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import { uploadToCloudinary } from "../utils/uploadToCloudinary";
+import { ChooseAuthor } from "../components/articleCreation/ChooseAuthor";
 
 const labels = ["ART", "SCULPTURE", "STREET ART"];
 const readTimes = ["5 min", "10 min", "15 min"];
@@ -127,6 +128,15 @@ const CreateArticle = () => {
     setStep("article");
   };
 
+  const onContinue = () => {
+    setArticleData((prev) => ({ ...prev, author: selectedAuthor }));
+    setStep("article");
+  };
+
+  const goToNew = () => {
+    setStep("new");
+  };
+
   const goBack = () => {
     setStep("choose");
   };
@@ -178,40 +188,47 @@ const CreateArticle = () => {
           Create Article
         </h1>
         {step === "choose" && (
-          <div className="flex flex-col gap-4 w-full max-w-xl">
-            <label className="text-lg font-semibold">
-              Choose existing author
-            </label>
-            <select
-              className="border border-black px-4 py-2 rounded"
-              value={selectedAuthor}
-              onChange={(e) => setSelectedAuthor(e.target.value)}
-            >
-              <option value="">-- Select an author --</option>
-              {authors.map((author) => (
-                <option key={author.id} value={author.name}>
-                  {author.name} ({author.job})
-                </option>
-              ))}
-            </select>
+          <ChooseAuthor
+            authors={authors}
+            selectedAuthor={selectedAuthor}
+            setSelectedAuthor={setSelectedAuthor}
+            onContinue={onContinue}
+            goToNew={goToNew}
+          />
+          // <div className="flex flex-col gap-4 w-full max-w-xl">
+          //   <label className="text-lg font-semibold">
+          //     Choose existing author
+          //   </label>
+          //   <select
+          //     className="border border-black px-4 py-2 rounded"
+          //     value={selectedAuthor}
+          //     onChange={(e) => setSelectedAuthor(e.target.value)}
+          //   >
+          //     <option value="">-- Select an author --</option>
+          //     {authors.map((author) => (
+          //       <option key={author.id} value={author.name}>
+          //         {author.name} ({author.job})
+          //       </option>
+          //     ))}
+          //   </select>
 
-            <button
-              className="px-6 py-3 bg-black text-white rounded disabled:opacity-50"
-              onClick={() => selectedAuthor && setStep("article")}
-              disabled={!selectedAuthor}
-            >
-              Continue with Selected Author
-            </button>
+          //   <button
+          //     className="px-6 py-3 bg-black text-white rounded disabled:opacity-50"
+          //     onClick={() => selectedAuthor && setStep("article")}
+          //     disabled={!selectedAuthor}
+          //   >
+          //     Continue with Selected Author
+          //   </button>
 
-            <p className="text-center my-4">or</p>
+          //   <p className="text-center my-4">or</p>
 
-            <button
-              className="px-6 py-2 border border-black rounded"
-              onClick={() => setStep("new")}
-            >
-              Create new author
-            </button>
-          </div>
+          //   <button
+          //     className="px-6 py-2 border border-black rounded"
+          //     onClick={() => setStep("new")}
+          //   >
+          //     Create new author
+          //   </button>
+          // </div>
         )}
         {step === "new" && (
           <div className="flex flex-col md:flex-row gap-10 items-start w-full max-w-4xl">

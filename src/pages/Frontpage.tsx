@@ -58,7 +58,7 @@ const Frontpage = () => {
 
       <div className="max-w-[1680px] mx-auto flex flex-col lg:flex-row gap-12 px-6">
         <div className="flex-1">
-          {articles.map((article, index) => (
+          {articles.slice(0, 10).map((article, index) => (
             <Article
               key={index}
               imageSrc={article.imageSrc}
@@ -74,7 +74,7 @@ const Frontpage = () => {
 
           <div className="flex justify-start px-6 mt-6">
             <a
-              href="/articles"
+              href="/magazine"
               className="group inline-flex items-center gap-2 text-base font-semibold uppercase text-black transition-colors duration-300 hover:text-neutral-700"
             >
               All Articles
@@ -92,7 +92,7 @@ const Frontpage = () => {
       <div className="h-[100px]"></div>
       <PodcastSectionHeader />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 max-w-[1680px] mx-auto">
-        {podcasts.map((podcast, index) => (
+        {podcasts.slice(0, 3).map((podcast, index) => (
           <Link to={`/podcasts/${podcast.episode}`}>
             <PodcastCard key={index} {...podcast} />
           </Link>
@@ -103,7 +103,7 @@ const Frontpage = () => {
       <div className="h-[100px]"></div>
       <AuthorsSectionHeader />
       <div className="grid grid-cols-1 md:grid-cols-2 border divide-y md:divide-y-0 md:divide-x max-w-[1680px] mx-auto">
-        {authors.map((author, index) => (
+        {authors.slice(0, 4).map((author, index) => (
           <div key={index} className="divide-y">
             <Link to={`/authors/${author.id}`}>
               <AuthorCard {...author} />
