@@ -28,12 +28,12 @@ const Frontpage = () => {
       try {
         const articleSnap = await getDocs(collection(db, "articles"));
         setArticles(articleSnap.docs.map((doc) => doc.data() as ArticleType));
-        
+
         const podcastSnap = await getDocs(collection(db, "podcasts"));
         setPodcasts(podcastSnap.docs.map((doc) => doc.data() as PodcastType));
-        
+
         const authorSnap = await getDocs(collection(db, "authors"));
-        setAuthors(authorSnap.docs.map((doc) => doc.data() as AuthorType ));
+        setAuthors(authorSnap.docs.map((doc) => doc.data() as AuthorType));
 
         setLoading(false);
       } catch (error) {

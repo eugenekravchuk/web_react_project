@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, or } from "firebase/firestore";
 import { db } from "../data/firebase";
 
 import Navbar from "../components/Navbar";
@@ -38,7 +38,7 @@ const MagazinePost = () => {
     const fetchArticle = async () => {
       const q = query(
         collection(db, "articles"),
-        where("id", "==", Number(slug))
+        or(where("id", "==", slug), where("id", "==", Number(slug)))
       );
       const querySnapshot = await getDocs(q);
       if (!querySnapshot.empty) {

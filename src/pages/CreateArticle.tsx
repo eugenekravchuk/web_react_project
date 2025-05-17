@@ -5,17 +5,21 @@ import Footer from "../components/Footer";
 import { AuthorType } from "../data/types";
 import { db } from "../data/firebase";
 import { collection, getDocs, addDoc } from "firebase/firestore";
+import { uploadToCloudinary } from "../utils/uploadToCloudinary";
 
 const labels = ["ART", "SCULPTURE", "STREET ART"];
+const readTimes = ["5 min", "10 min", "15 min"];
 
 const CreateArticle = () => {
   const navigate = useNavigate();
 
-  const [photo, setPhoto] = useState<File | null>(null);
+  const [photoAuthor, setPhotoAuthor] = useState<File | null>(null);
+  const [photoArticle, setPhotoArticle] = useState<File | null>(null);
+
   const [selectedLabel, setSelectedLabel] = useState<string>("");
   const [authors, setAuthors] = useState<AuthorType[]>([]);
   const [step, setStep] = useState<"choose" | "new" | "article">("choose");
-  const [selectedAuthorId, setSelectedAuthorId] = useState<string>("");
+  const [selectedAuthor, setSelectedAuthor] = useState<string>("");
   const [newAuthor, setNewAuthor] = useState<Omit<AuthorType, "id">>({
     name: "",
     imageSrc: "",
@@ -27,10 +31,18 @@ const CreateArticle = () => {
 
   const [articleData, setArticleData] = useState({
     title: "",
-    brief: "",
+    author: "",
+    imageSrc: "",
+    description: "",
+    date: new Date().toISOString().split("T")[0],
+    readTime: "5 min",
+    label: "",
+    bold_info1: "",
+    bold_info2: "",
+    info1: "",
+    info2: "",
     quote: "",
-    quoteAuthor: "",
-    content: "",
+    quote_author: "",
   });
 
   useEffect(() => {
@@ -45,15 +57,73 @@ const CreateArticle = () => {
     fetchAuthors();
   }, []);
 
-  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const validateAuthor = () => {
+    const { name, job, bold_info, info } = newAuthor;
+    console.log(name);
+    console.log(name && job && bold_info.length >= 3 && info.length >= 10);
+    console.log(name && job && bold_info.length >= 3 && info.length >= 10);
+    console.log(name && job && bold_info.length >= 3 && info.length >= 10);
+    return name && job && bold_info.length >= 3 && info.length >= 10;
+  };
+
+  const validateArticle = () => {
+    const {
+      title,
+      description,
+      bold_info1,
+      bold_info2,
+      info1,
+      info2,
+      label,
+      author,
+    } = articleData;
+
+    return (
+      title.trim() !== "" &&
+      description.trim() !== "" &&
+      bold_info1.trim() !== "" &&
+      bold_info2.trim() !== "" &&
+      info1.trim() !== "" &&
+      info2.trim() !== "" &&
+      label.trim() !== ""
+    );
+  };
+
+  const handlePhotoAuthorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setPhoto(e.target.files[0]);
+      setPhotoAuthor(e.target.files[0]);
+    }
+  };
+
+  const handlePhotoArticleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setPhotoArticle(e.target.files[0]);
     }
   };
 
   const handleCreateAuthor = async () => {
-    const docRef = await addDoc(collection(db, "authors"), newAuthor);
-    setSelectedAuthorId(docRef.id);
+    if (!validateAuthor()) {
+      alert("Please fill all required author fields.");
+      return;
+    }
+
+    let imagePublicId = "";
+    if (photoAuthor) {
+      imagePublicId = await uploadToCloudinary(photoAuthor);
+    }
+
+    imagePublicId =
+      "https://res.cloudinary.com/dwcbm3x3w/image/upload/v1747504771/" +
+      imagePublicId;
+
+    const docRef = await addDoc(collection(db, "authors"), {
+      ...newAuthor,
+      imageSrc: imagePublicId,
+      id: authors.length + 1,
+      city: "Lviv",
+    });
+
+    setSelectedAuthor(newAuthor.name);
     setStep("article");
   };
 
@@ -61,13 +131,30 @@ const CreateArticle = () => {
     setStep("choose");
   };
 
-  const handleFinish = () => {
-    console.log("Submitted article", {
+  const handleFinish = async () => {
+    if (!validateArticle()) {
+      alert("Please fill in all required article fields.");
+      return;
+    }
+
+    let articleImage = "";
+    if (photoArticle) {
+      articleImage = await uploadToCloudinary(photoArticle);
+    }
+
+    articleImage =
+      "https://res.cloudinary.com/dwcbm3x3w/image/upload/v1747504771/" +
+      articleImage;
+
+    await addDoc(collection(db, "articles"), {
       ...articleData,
-      label: selectedLabel,
-      authorId: selectedAuthorId,
+      imageSrc: articleImage,
+      id: Date.now(),
+      author: selectedAuthor,
     });
+
     alert("Article submitted!");
+    navigate("/magazine");
   };
 
   return (
@@ -90,7 +177,6 @@ const CreateArticle = () => {
         <h1 className="text-5xl md:text-7xl font-extrabold mb-20">
           Create Article
         </h1>
-
         {step === "choose" && (
           <div className="flex flex-col gap-4 w-full max-w-xl">
             <label className="text-lg font-semibold">
@@ -98,12 +184,12 @@ const CreateArticle = () => {
             </label>
             <select
               className="border border-black px-4 py-2 rounded"
-              value={selectedAuthorId}
-              onChange={(e) => setSelectedAuthorId(e.target.value)}
+              value={selectedAuthor}
+              onChange={(e) => setSelectedAuthor(e.target.value)}
             >
               <option value="">-- Select an author --</option>
               {authors.map((author) => (
-                <option key={author.id} value={author.id}>
+                <option key={author.id} value={author.name}>
                   {author.name} ({author.job})
                 </option>
               ))}
@@ -111,8 +197,8 @@ const CreateArticle = () => {
 
             <button
               className="px-6 py-3 bg-black text-white rounded disabled:opacity-50"
-              onClick={() => selectedAuthorId && setStep("article")}
-              disabled={!selectedAuthorId}
+              onClick={() => selectedAuthor && setStep("article")}
+              disabled={!selectedAuthor}
             >
               Continue with Selected Author
             </button>
@@ -127,16 +213,15 @@ const CreateArticle = () => {
             </button>
           </div>
         )}
-
         {step === "new" && (
           <div className="flex flex-col md:flex-row gap-10 items-start w-full max-w-4xl">
             <label
               htmlFor="photo-upload"
               className="w-64 h-80 border-2 border-black border-dashed flex items-center justify-center cursor-pointer text-center"
             >
-              {photo ? (
+              {photoAuthor ? (
                 <img
-                  src={URL.createObjectURL(photo)}
+                  src={URL.createObjectURL(photoAuthor)}
                   alt="Selected"
                   className="w-full h-full object-cover"
                 />
@@ -151,7 +236,7 @@ const CreateArticle = () => {
                 id="photo-upload"
                 accept="image/*"
                 className="hidden"
-                onChange={handlePhotoChange}
+                onChange={handlePhotoAuthorChange}
               />
             </label>
 
@@ -175,7 +260,10 @@ const CreateArticle = () => {
                 className="border px-4 py-2 rounded resize-none"
                 rows={3}
                 onChange={(e) =>
-                  setNewAuthor((prev) => ({ ...prev, skills: e.target.value }))
+                  setNewAuthor((prev) => ({
+                    ...prev,
+                    bold_info: e.target.value,
+                  }))
                 }
               />
               <textarea
@@ -183,7 +271,7 @@ const CreateArticle = () => {
                 className="border px-4 py-2 rounded resize-none"
                 rows={4}
                 onChange={(e) =>
-                  setNewAuthor((prev) => ({ ...prev, about: e.target.value }))
+                  setNewAuthor((prev) => ({ ...prev, info: e.target.value }))
                 }
               />
 
@@ -206,21 +294,21 @@ const CreateArticle = () => {
         )}
 
         {step === "article" && (
-          <div className="w-full max-w-xl flex flex-col gap-4">
+          <div className="space-y-6 max-w-4xl">
             <label
               htmlFor="article-photo"
               className="w-full h-60 border-2 border-black border-dashed flex items-center justify-center cursor-pointer text-center"
             >
-              {photo ? (
+              {photoArticle ? (
                 <img
-                  src={URL.createObjectURL(photo)}
+                  src={URL.createObjectURL(photoArticle)}
                   alt="Selected"
                   className="w-full h-full object-cover"
                 />
               ) : (
                 <div>
                   <p className="text-2xl font-medium">+</p>
-                  <p className="text-lg">Add photo</p>
+                  <p className="text-lg">Add article photo</p>
                 </div>
               )}
               <input
@@ -228,24 +316,50 @@ const CreateArticle = () => {
                 id="article-photo"
                 accept="image/*"
                 className="hidden"
-                onChange={handlePhotoChange}
+                onChange={handlePhotoArticleChange}
               />
             </label>
 
             <input
               type="text"
               placeholder="Title"
-              className="border border-black px-4 py-2 rounded"
+              className="w-full border px-4 py-2 rounded"
               value={articleData.title}
               onChange={(e) =>
                 setArticleData({ ...articleData, title: e.target.value })
               }
             />
 
+            <input
+              type="text"
+              placeholder="Description"
+              className="w-full border px-4 py-2 rounded"
+              value={articleData.description}
+              onChange={(e) =>
+                setArticleData({ ...articleData, description: e.target.value })
+              }
+            />
+
             <select
-              className="border border-black px-4 py-2 rounded"
-              value={selectedLabel}
-              onChange={(e) => setSelectedLabel(e.target.value)}
+              className="w-full border px-4 py-2 rounded"
+              value={articleData.readTime}
+              onChange={(e) =>
+                setArticleData({ ...articleData, readTime: e.target.value })
+              }
+            >
+              {readTimes.map((time) => (
+                <option key={time} value={time}>
+                  {time}
+                </option>
+              ))}
+            </select>
+
+            <select
+              className="w-full border px-4 py-2 rounded"
+              value={articleData.label}
+              onChange={(e) =>
+                setArticleData({ ...articleData, label: e.target.value })
+              }
             >
               <option value="" disabled>
                 Label
@@ -257,20 +371,46 @@ const CreateArticle = () => {
               ))}
             </select>
 
-            <input
-              type="text"
-              placeholder="Brief description"
-              className="border border-black px-4 py-2 rounded"
-              value={articleData.brief}
+            <textarea
+              placeholder="Bold Info 1"
+              className="w-full border px-4 py-2 rounded"
+              value={articleData.bold_info1}
               onChange={(e) =>
-                setArticleData({ ...articleData, brief: e.target.value })
+                setArticleData({ ...articleData, bold_info1: e.target.value })
+              }
+            />
+
+            <textarea
+              placeholder="Info 1"
+              className="w-full border px-4 py-2 rounded"
+              value={articleData.info1}
+              onChange={(e) =>
+                setArticleData({ ...articleData, info1: e.target.value })
+              }
+            />
+
+            <textarea
+              placeholder="Bold Info 2"
+              className="w-full border px-4 py-2 rounded"
+              value={articleData.bold_info2}
+              onChange={(e) =>
+                setArticleData({ ...articleData, bold_info2: e.target.value })
+              }
+            />
+
+            <textarea
+              placeholder="Info 2"
+              className="w-full border px-4 py-2 rounded"
+              value={articleData.info2}
+              onChange={(e) =>
+                setArticleData({ ...articleData, info2: e.target.value })
               }
             />
 
             <input
               type="text"
               placeholder="Quote"
-              className="border border-black px-4 py-2 rounded"
+              className="w-full border px-4 py-2 rounded"
               value={articleData.quote}
               onChange={(e) =>
                 setArticleData({ ...articleData, quote: e.target.value })
@@ -279,28 +419,15 @@ const CreateArticle = () => {
 
             <input
               type="text"
-              placeholder="Quote author"
-              className="border border-black px-4 py-2 rounded"
-              value={articleData.quoteAuthor}
+              placeholder="Quote Author"
+              className="w-full border px-4 py-2 rounded"
+              value={articleData.quote_author}
               onChange={(e) =>
-                setArticleData({
-                  ...articleData,
-                  quoteAuthor: e.target.value,
-                })
+                setArticleData({ ...articleData, quote_author: e.target.value })
               }
             />
 
-            <textarea
-              placeholder="Long Text"
-              rows={5}
-              className="border border-black px-4 py-2 rounded resize-none"
-              value={articleData.content}
-              onChange={(e) =>
-                setArticleData({ ...articleData, content: e.target.value })
-              }
-            />
-
-            <div className="flex gap-4 mt-4 self-center">
+            <div className="flex gap-4 justify-center">
               <button
                 className="px-6 py-2 border border-black rounded"
                 onClick={goBack}
