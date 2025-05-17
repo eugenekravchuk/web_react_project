@@ -14,11 +14,11 @@ const AuthorCard: React.FC<AuthorCardProps> = ({
   city,
 }) => {
   return (
-    <div className="flex items-center gap-4 p-6 w-full">
+    <div className="flex items-center gap-4 p-6 w-full border">
       <img
         src={imageSrc}
         alt={name}
-        className="w-20 h-20 object-cover rounded-full mr-10"
+        className="w-20 h-20 object-cover rounded-full mr-10 "
       />
       <div>
         <h3 className="font-bold text-xl">{name}</h3>
