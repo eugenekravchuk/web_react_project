@@ -1,35 +1,56 @@
+import { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../data/firebase";
+import { ArticleType, PodcastType, AuthorType } from "../data/types";
+
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import MagazineLogo from "../assets/headers/Magazine.svg";
 
-import { articleImages } from "../data/articles";
-import { useState } from "react";
 import ArticleCard from "../components/ArticleCard";
 
-// Define your categories and articles with category information
 const categories = ["ALL", "ART", "STREET ART", "SCULPTURES"];
 
-// Mock articles data with categories (replace with your actual data structure)
-const articles = articleImages.map((image, index) => ({
-  id: index + 1,
-  imageSrc: image,
-  title: "Hope dies last",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-  author: "Jakob Gronberg",
-  date: "16 March 2022",
-  readTime: `${index % 3 + 1} Min`, // Varying read times
-  label: ["ART", "STREET ART", "SCULPTURES"][index % 3], // Assign different categories
-  slug: `article-${index + 1}`
-}));
-
 const Magazine = () => {
+  const [articles, setArticles] = useState<ArticleType[]>([]);
+  const [filteredArticles, setFilteredArticles] = useState<ArticleType[]>([]);
   const [selected, setSelected] = useState<string>("ALL");
+  const [loading, setLoading] = useState(true);
 
-  // Filter articles based on selected category
-  const filteredArticles = selected === "ALL" 
-    ? articles 
-    : articles.filter(article => article.label === selected);
+  useEffect(() => {
+    const fetchFirestoreData = async () => {
+      try {
+        const articleSnap = await getDocs(collection(db, "articles"));
+        setArticles(articleSnap.docs.map((doc) => doc.data() as ArticleType));
+        setFilteredArticles(
+          articleSnap.docs.map((doc) => doc.data() as ArticleType)
+        );
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching Firestore data:", error);
+      }
+    };
+
+    fetchFirestoreData();
+  }, []);
+
+  useEffect(() => {
+    setFilteredArticles(
+      selected == "ALL"
+        ? articles
+        : articles.filter((article) => article.label == selected)
+    );
+  }, [selected]);
+
+  // const filteredArticles =
+  //   selected === "ALL"
+  //     ? articles
+  //     : articles.filter((article) => article.label === selected);
+
+  if (loading) {
+    return <div className="text-center py-20 text-xl">Loading...</div>;
+  }
 
   return (
     <div className="mx-auto">
@@ -69,7 +90,7 @@ const Magazine = () => {
                 date={article.date}
                 readTime={article.readTime}
                 label={article.label}
-                slug={article.slug}
+                slug={article.id}
               />
             </div>
           ))}

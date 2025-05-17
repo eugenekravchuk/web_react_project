@@ -10,6 +10,8 @@ const Navbar = () => {
         FYRRE MAGAZINE
       </Link>
       <div className="flex gap-6 items-center text-sm text-gray-700">
+        <Link to="/create-author">Create Author</Link>
+        <Link to="/create-article">Create Article</Link>
         <Link to="/magazine">Magazine</Link>
         <Link to="/authors">Authors</Link>
         <Link to="/podcasts">Podcasts</Link>

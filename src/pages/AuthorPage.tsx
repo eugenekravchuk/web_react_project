@@ -17,6 +17,8 @@ interface Author {
   job: string;
   description: string;
   imageSrc: string;
+  bold_info: string;
+  info: string;
 }
 
 interface Article {
@@ -38,7 +40,10 @@ const AuthorPage = () => {
   useEffect(() => {
     const fetchAuthor = async () => {
       try {
-        const authorQuery = query(collection(db, "authors"), where("id", "==", Number(slug)));
+        const authorQuery = query(
+          collection(db, "authors"),
+          where("id", "==", Number(slug))
+        );
         const authorSnapshot = await getDocs(authorQuery);
         if (!authorSnapshot.empty) {
           setAuthor(authorSnapshot.docs[0].data() as Author);
@@ -47,18 +52,23 @@ const AuthorPage = () => {
         console.error("Error fetching author:", error);
       }
     };
-  
+
     fetchAuthor();
   }, [slug]);
-  
+
   useEffect(() => {
     const fetchArticles = async () => {
       if (!author) return;
-  
+
       try {
-        const articlesQuery = query(collection(db, "articles"), where("author", "==", author.name));
+        const articlesQuery = query(
+          collection(db, "articles"),
+          where("author", "==", author.name)
+        );
         const articleSnapshot = await getDocs(articlesQuery);
-        const articleList = articleSnapshot.docs.map((doc) => doc.data() as Article);
+        const articleList = articleSnapshot.docs.map(
+          (doc) => doc.data() as Article
+        );
         setArticles(articleList);
       } catch (error) {
         console.error("Error fetching articles:", error);
@@ -66,13 +76,14 @@ const AuthorPage = () => {
         setLoading(false);
       }
     };
-  
+
     fetchArticles();
   }, [author]);
-  
 
-  if (loading) return <div className="text-center py-20 text-xl">Loading author...</div>;
-  if (!author) return <div className="text-center py-20 text-xl">Author not found</div>;
+  if (loading)
+    return <div className="text-center py-20 text-xl">Loading author...</div>;
+  if (!author)
+    return <div className="text-center py-20 text-xl">Author not found</div>;
 
   return (
     <div className="mx-auto">
@@ -87,7 +98,9 @@ const AuthorPage = () => {
             ← Go Back
           </button>
 
-          <h1 className="text-lg font-black tracking-wider uppercase">Authors</h1>
+          <h1 className="text-lg font-black tracking-wider uppercase">
+            Authors
+          </h1>
         </div>
       </div>
 
@@ -102,19 +115,33 @@ const AuthorPage = () => {
           <div className="w-full flex items-center justify-between border-t pt-4">
             <p className="font-bold text-sm tracking-wide mb-2">FOLLOW</p>
             <div className="flex items-center gap-4 text-zinc-700">
-              <a href=""><img src={Insta} alt="Instagram" /></a>
-              <a href=""><img src={YouTube} alt="YouTube" /></a>
-              <a href=""><img src={Twitter} alt="Twitter" /></a>
+              <a href="">
+                <img src={Insta} alt="Instagram" />
+              </a>
+              <a href="">
+                <img src={YouTube} alt="YouTube" />
+              </a>
+              <a href="">
+                <img src={Twitter} alt="Twitter" />
+              </a>
             </div>
           </div>
         </div>
 
         <div className="md:col-span-2">
-          <h1 className="text-5xl font-extrabold leading-none mb-6">{author.name}</h1>
-          <p className="text-lg font-bold text-zinc-800 mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas dui id ornare arcu odio ut sem. Cras ornare arcu dui vivamus arcu felis bibendum ut. Porttitor leo a diam.</p>
-          <p className="text-lg font-regular text-zinc-800 mb-6">Porttitor rhoncus dolor purus non enim praesent elementum. Eget dolor morbi non arcu risus quis varius. Posuere ac ut consequat semper viverra nam libero. In ornare quam viverra orci sagittis eu. Tristique risus nec feugiat in fermentum posuere urna nec. Tempus quam pellentesque nec nam aliquam sem et. Convallis a cras semper auctor neque vitae tempus quam pellentesque. Sollicitudin ac orci phasellus egestas tellus rutrum tellus pellentesque. Sed egestas egestas fringilla phasellus faucibus scelerisque eleifend donec pretium. Sit amet porttitor eget dolor morbi non arcu risus. Justo eget magna fermentum iaculis eu non diam phasellus. Sit amet luctus venenatis lectus magna fringilla. Neque vitae tempus quam pellentesque nec nam.</p>
+          <h1 className="text-5xl font-extrabold leading-none mb-6">
+            {author.name}
+          </h1>
+          <p className="text-lg font-bold text-zinc-800 mb-6">
+            {author.bold_info}
+          </p>
+          <p className="text-lg font-regular text-zinc-800 mb-6">
+            {author.info}
+          </p>
 
-          <p className="text-sm text-zinc-500 leading-relaxed">{author.description}</p>
+          <p className="text-sm text-zinc-500 leading-relaxed">
+            {author.description}
+          </p>
         </div>
       </section>
 
