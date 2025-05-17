@@ -57,7 +57,7 @@ const Frontpage = () => {
 
       <div className="max-w-[1680px] mx-auto flex flex-col lg:flex-row gap-12 px-6">
         <div className="flex-1">
-          {articles.map((article, index) => (
+          {articles.slice(0, 6).map((article, index) => (
             <Article
               key={index}
               imageSrc={article.imageSrc}
@@ -73,7 +73,7 @@ const Frontpage = () => {
 
           <div className="flex justify-start px-6 mt-6">
             <a
-              href="/articles"
+              href="/magazine"
               className="group inline-flex items-center gap-2 text-base font-semibold uppercase text-black transition-colors duration-300 hover:text-neutral-700"
             >
               All Articles
@@ -99,12 +99,28 @@ const Frontpage = () => {
       {/* Authors */}
       <div className="h-[100px]"></div>
       <AuthorsSectionHeader />
-      <div className="grid grid-cols-1 md:grid-cols-2 border divide-y md:divide-y-0 md:divide-x max-w-[1680px] mx-auto">
+
+      <div className="grid grid-cols-1 md:grid-cols-2 border border-black max-w-[1680px] mx-auto px-6">
         {authors.map((author, index) => (
-          <div key={index} className="divide-y">
+          <div
+            key={index}
+            className="border-b border-black md:border-r last:border-b-0 md:even:border-r-0 p-6"
+          >
             <AuthorCard {...author} />
           </div>
         ))}
+      </div>
+
+      <div className="flex justify-end max-w-[1680px] mx-auto px-6 mt-6">
+        <a
+          href="/authors"
+          className="group inline-flex items-center gap-2 text-base font-semibold uppercase text-black transition-colors duration-300 hover:text-neutral-700"
+        >
+          All Authors
+          <span className="inline-block text-xl transform transition-transform duration-300 group-hover:translate-x-1.5">
+            →
+          </span>
+        </a>
       </div>
 
       <div className="h-[100px]"></div>
