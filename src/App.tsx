@@ -6,7 +6,6 @@ import Podcasts from "./pages/Podcasts";
 import PodcastPost from "./pages/PodcastPost";
 import Authors from "./pages/Authors";
 import AuthorPage from "./pages/AuthorPage";
-import CreateAuthor from "./pages/CreateAuthor";
 import CreateArticle from "./pages/CreateArticle";
 
 function App() {
@@ -21,7 +20,6 @@ function App() {
         <Route path="/authors" element={<Authors />} />
         <Route path="/authors/:slug" element={<AuthorPage />} />
         <Route path="/create-article" element={<CreateArticle />} />
-        <Route path="/create-author" element={<CreateAuthor />} />
       </Routes>
     </BrowserRouter>
   );
