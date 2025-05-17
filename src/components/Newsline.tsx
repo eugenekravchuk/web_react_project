@@ -1,18 +1,42 @@
+import { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../data/firebase";
+
 const Newsline = () => {
-  const content = (
+  const [titles, setTitles] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        const snapshot = await getDocs(collection(db, "articles"));
+        const fetchedTitles = snapshot.docs.map(doc => doc.data().title);
+        setTitles(fetchedTitles);
+      } catch (error) {
+        console.error("Помилка при завантаженні статей:", error);
+      }
+    };
+
+    fetchArticles();
+  }, []);
+
+  const content = titles.length > 0 ? (
     <>
       <strong className="mr-6">NEWS TICKER+++</strong>
-      <span className="mr-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit +++</span>
-      <span className="mr-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit +++</span>
-      <span className="mr-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit +++</span>
+      {titles.map((title, idx) => (
+        <span key={idx} className="mr-12">
+          +  {title}  +
+        </span>
+      ))}
     </>
+  ) : (
+    <>Loading news...</>
   );
 
   return (
     <div className="bg-black text-white overflow-hidden whitespace-nowrap py-3 px-5 group">
-      <div className="marquee-wrapper">
+      <div className="marquee-wrapper flex animate-marquee">
         {content}
-        {content} {/* дублюю зміст, щоб не було цих пробілів негарних */}
+        {content} {/* дублюю для безперервного руху */}
       </div>
     </div>
   );

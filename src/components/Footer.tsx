@@ -1,8 +1,17 @@
 import Insta from "../assets/ri_instagram-line.png";
 import YouTube from "../assets/ri_youtube-fill.png";
 import Twitter from "../assets/ri_twitter-fill.png";
+import NewsForm from "./NewsForm";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const Footer = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [location.search]);
   return (
     <footer className="bg-black text-white text-sm">
       {/* Top Newsline */}
@@ -21,16 +30,7 @@ const Footer = () => {
         </div>
 
         <div className="flex items-center justify-end">
-          <form className="flex w-full max-w-md">
-            <input
-              type="email"
-              placeholder="Email"
-              className="bg-white flex-grow px-4 py-2 text-black mr-2"
-            />
-            <button className="px-4 py-2 self-end bg-white text-black text-sm font-bold transition duration-200 border border-white hover:bg-transparent hover:text-white cursor-pointer">
-              SIGN UP
-            </button>
-          </form>
+          <NewsForm />
         </div>
       </div>
 
@@ -46,51 +46,66 @@ const Footer = () => {
           <div className="col-span-3 grid grid-cols-3 gap-8 text-gray-300 mt-10 text-base">
             <ul className="space-y-1">
               <li>
-                <a href="#" className="block mb-3">
+                <Link to="/magazine?filter=ART" className="block mb-3">
                   Art
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="block mb-3">
-                  Design
-                </a>
+                <Link to="/magazine?filter=STREET ART" className="block mb-3">
+                  Street Art
+                </Link>
               </li>
               <li>
-                <a href="#" className="block mb-3">
-                  Architecture
-                </a>
+                <Link to="/magazine?filter=SCULPTURES" className="block mb-3">
+                  Sculptures
+                </Link>
               </li>
             </ul>
             <ul className="space-y-1">
               <li>
-                <a href="#" className="block mb-3">
+                <Link to="/magazine" className="block mb-3">
                   Magazine
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="block mb-3">
+                <Link to="/podcasts" className="block mb-3">
                   Podcast
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="block mb-3">
+                <Link to="/authors" className="block mb-3">
                   Authors
-                </a>
+                </Link>
               </li>
             </ul>
             <ul className="space-y-1">
               <li>
-                <a href="#" className="block mb-3">
+                <a
+                  href="https://material.io/design"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block mb-3"
+                >
                   Styleguide
                 </a>
               </li>
               <li>
-                <a href="#" className="block mb-3">
+                <a
+                  href="https://creativecommons.org/licenses/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block mb-3"
+                >
                   Licensing
                 </a>
               </li>
               <li>
-                <a href="#" className="block mb-3">
+                <a
+                  href="https://developers.google.com/search/blog"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block mb-3"
+                >
                   Changelog
                 </a>
               </li>
