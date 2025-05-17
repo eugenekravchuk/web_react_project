@@ -23,7 +23,7 @@ interface Author {
 
 interface Article {
   title: string;
-  slug: string;
+  id: string;
   date: string;
   readTime: string;
   imageSrc: string;
@@ -159,7 +159,7 @@ const AuthorPage = () => {
 
             return (
               <Link
-                to={`/articles/${article.slug}`}
+                to={`/articles/${article.id}`}
                 key={idx}
                 className={`
                 flex items-center gap-6 p-6 border border-black border-opacity-20 transition group

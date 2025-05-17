@@ -4,7 +4,7 @@ const PodcastSectionHeader = () => {
       <h2 className="text-7xl font-extrabold">PODCAST</h2>
       <div className="flex justify-start px-6 mt-6">
             <a
-              href="/podcasts"
+              href="/podcast"
               className="group inline-flex items-center gap-2 text-base font-semibold uppercase text-black transition-colors duration-300 hover:text-neutral-700"
             >
               All Podcasts

@@ -118,9 +118,7 @@ const Footer = () => {
       <div className="max-w-[1680px] mx-auto px-6 pb-10">
         <div className="flex flex-col lg:flex-row justify-between items-center gap-6 border-t border-white/10 pt-6">
           {/* Copyright */}
-          <p className="text-xs text-gray-400">
-            © Made by Pawel Gola – Powered by Webflow
-          </p>
+          <p className="text-xs text-gray-400"></p>
 
           {/* Social Icons */}
           <div className="flex gap-4">

@@ -42,9 +42,12 @@ const PodcastPost = () => {
   useEffect(() => {
     const fetchPodcast = async () => {
       try {
-        const q = query(collection(db, "podcasts"), where("episode", "==", slug));
+        const q = query(
+          collection(db, "podcasts"),
+          where("episode", "==", Number(slug))
+        );
         const querySnapshot = await getDocs(q);
-        
+
         if (!querySnapshot.empty) {
           const data = querySnapshot.docs[0].data() as Podcast;
           setPodcast(data);
@@ -111,17 +114,29 @@ const PodcastPost = () => {
               <p>{podcast.description}</p>
               <div className="mt-6 flex gap-4">
                 {podcast.listenLinks?.youtube && (
-                  <a href={podcast.listenLinks.youtube} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={podcast.listenLinks.youtube}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <img src={YouTube} alt="YouTube" className="h-6" />
                   </a>
                 )}
                 {podcast.listenLinks?.instagram && (
-                  <a href={podcast.listenLinks.instagram} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={podcast.listenLinks.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <img src={Insta} alt="Instagram" className="h-6" />
                   </a>
                 )}
                 {podcast.listenLinks?.twitter && (
-                  <a href={podcast.listenLinks.twitter} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={podcast.listenLinks.twitter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <img src={Twitter} alt="Twitter" className="h-6" />
                   </a>
                 )}
@@ -152,9 +167,9 @@ const PodcastPost = () => {
 
         {/* Podcast Cover Image */}
         <div className="w-full relative">
-          <img 
-            src={podcast.imageSrc || defaultPodcastImage} 
-            className="w-full h-[600px] object-cover" 
+          <img
+            src={podcast.imageSrc || defaultPodcastImage}
+            className="w-full h-[600px] object-cover"
             alt={`Podcast cover for ${podcast.title}`}
           />
           <div className="absolute bottom-6 left-6 text-white text-4xl font-bold">
@@ -179,9 +194,15 @@ const PodcastPost = () => {
               <div className="flex justify-between items-center">
                 <span className="font-semibold">Share</span>
                 <div className="flex gap-4">
-                  <a href="#"><img src={Insta} alt="Insta" className="h-5" /></a>
-                  <a href="#"><img src={YouTube} alt="YouTube" className="h-5" /></a>
-                  <a href="#"><img src={Twitter} alt="Twitter" className="h-5" /></a>
+                  <a href="#">
+                    <img src={Insta} alt="Insta" className="h-5" />
+                  </a>
+                  <a href="#">
+                    <img src={YouTube} alt="YouTube" className="h-5" />
+                  </a>
+                  <a href="#">
+                    <img src={Twitter} alt="Twitter" className="h-5" />
+                  </a>
                 </div>
               </div>
             </div>
@@ -195,19 +216,20 @@ const PodcastPost = () => {
             ) : (
               <>
                 <p className="font-semibold">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                   Egestas dui id ornare arcu odio ut sem. Cras ornare arcu dui
                   vivamus arcu felis bibendum ut. Porttitor leo a diam.
                 </p>
 
                 <p>
-                  Porttitor rhoncus dolor purus non enim praesent elementum. Eget
-                  dolor morbi non arcu risus quis varius. Posuere ac ut consequat
-                  semper viverra nam libero. In ornare quam viverra orci sagittis
-                  eu. Tristique risus nec feugiat in fermentum posuere urna nec.
-                  Tempus quam pellentesque nec nam aliquam sem et. Convallis a cras
-                  semper auctor neque vitae tempus quam pellentesque.
+                  Porttitor rhoncus dolor purus non enim praesent elementum.
+                  Eget dolor morbi non arcu risus quis varius. Posuere ac ut
+                  consequat semper viverra nam libero. In ornare quam viverra
+                  orci sagittis eu. Tristique risus nec feugiat in fermentum
+                  posuere urna nec. Tempus quam pellentesque nec nam aliquam sem
+                  et. Convallis a cras semper auctor neque vitae tempus quam
+                  pellentesque.
                 </p>
               </>
             )}

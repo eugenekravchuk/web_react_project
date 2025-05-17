@@ -14,6 +14,7 @@ import AuthorCard from "../components/AuthorCard";
 import Footer from "../components/Footer";
 import Sidebar from "../components/Sidebar";
 import Newsline from "../components/Newsline";
+import { Link } from "react-router-dom";
 
 import ArtLogo from "../assets/headers/Art.svg";
 
@@ -57,7 +58,7 @@ const Frontpage = () => {
 
       <div className="max-w-[1680px] mx-auto flex flex-col lg:flex-row gap-12 px-6">
         <div className="flex-1">
-          {articles.slice(0, 6).map((article, index) => (
+          {articles.map((article, index) => (
             <Article
               key={index}
               imageSrc={article.imageSrc}
@@ -91,21 +92,19 @@ const Frontpage = () => {
       <div className="h-[100px]"></div>
       <PodcastSectionHeader />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 max-w-[1680px] mx-auto">
-        {podcasts.map((podcast, index) => (
-          <PodcastCard key={index} {...podcast} />
+        {podcasts.slice(0, 3).map((podcast, index) => (
+          <Link to={`/podcasts/${podcast.episode}`}>
+            <PodcastCard key={index} {...podcast} />
+          </Link>
         ))}
       </div>
 
       {/* Authors */}
       <div className="h-[100px]"></div>
       <AuthorsSectionHeader />
-
-      <div className="grid grid-cols-1 md:grid-cols-2 border border-black max-w-[1680px] mx-auto px-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 border divide-y md:divide-y-0 md:divide-x max-w-[1680px] mx-auto">
         {authors.map((author, index) => (
-          <div
-            key={index}
-            className="border-b border-black md:border-r last:border-b-0 md:even:border-r-0 p-6"
-          >
+          <div key={index} className="divide-y">
             <AuthorCard {...author} />
           </div>
         ))}
