@@ -39,7 +39,7 @@ const handleSubmit = async (e: React.FormEvent) => {
       "service_54589qv",
       "template_2xxuqil",
       { user_email: email },
-      "RV60k2-86zcYbljzp"
+      "paste here"
     );
 
     alert("Дякуємо! Ми надіслали вам листа.");
