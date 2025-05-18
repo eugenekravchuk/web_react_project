@@ -43,7 +43,7 @@ const Podcasts = () => {
   return (
     <div className="mx-auto">
       <Navbar />
-      <Header header={PodcastLogo} />
+      <Header header="PODCASTS" />
 
       <div className="max-w-[1680px] mx-auto px-6 py-12 flex flex-col gap-6 mb-40 mt-14">
         {podcasts.map((podcast) => (

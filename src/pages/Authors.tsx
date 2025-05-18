@@ -42,7 +42,7 @@ const Authors = () => {
   return (
     <div className="mx-auto">
       <Navbar />
-      <Header header={AuthorsLogo} />
+      <Header header="AUTHORS" />
 
       <div className="h-[100px]"></div>
 

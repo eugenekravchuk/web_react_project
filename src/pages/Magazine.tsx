@@ -59,7 +59,7 @@ const Magazine = () => {
   return (
     <div className="mx-auto">
       <Navbar />
-      <Header className="w-full" header={MagazineLogo} />
+      <Header header="Magazine" />
 
       <div className="max-w-[1680px] mx-auto flex flex-col gap-12 px-6">
         {/* Categories */}
@@ -78,7 +78,6 @@ const Magazine = () => {
             </button>
           ))}
         </div>
-
 
         {/* Articles */}
         <div className="flex flex-wrap w-full">

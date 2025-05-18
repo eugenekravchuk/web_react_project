@@ -52,7 +52,7 @@ const Frontpage = () => {
   return (
     <div className="mx-auto">
       <Navbar />
-      <Header header={ArtLogo} />
+      <Header header="ART & LIFE" />
       <Newsline />
       <Hero />
 
