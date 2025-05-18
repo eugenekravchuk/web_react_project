@@ -58,7 +58,7 @@ const Frontpage = () => {
 
       <div className="max-w-[1680px] mx-auto flex flex-col lg:flex-row gap-12 px-6">
         <div className="flex-1">
-          {articles.slice(0, 10).map((article, index) => (
+          {articles.slice(0, 6).map((article, index) => (
             <Article
               key={index}
               imageSrc={article.imageSrc}
