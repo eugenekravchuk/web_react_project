@@ -145,7 +145,7 @@ const MagazinePost = () => {
         />
 
         <section className="grid grid-cols-1 md:grid-cols-4 gap-10">
-          <aside className="max-w-xs p-6 border rounded-md text-center">
+          <aside className="max-w-xs p-6  rounded-md text-center">
             <h2 className="text-2xl font-bold break-words">{article.author}</h2>
             <hr className="my-6 border-black" />
             <div className="text-sm space-y-6 text-left">
