@@ -9,8 +9,6 @@ const Navbar = lazy(() => import("../components/Navbar"));
 const Footer = lazy(() => import("../components/Footer"));
 const ArticleCard = lazy(() => import("../components/ArticleCard"));
 
-import MagazineLogo from "../assets/headers/Magazine.svg";
-
 const categories = ["ALL", "ART", "STREET ART", "SCULPTURES"];
 
 const Magazine = () => {
