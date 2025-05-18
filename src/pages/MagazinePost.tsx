@@ -54,7 +54,30 @@ const MagazinePost = () => {
   }, [slug]);
 
   if (loading) {
-    return <div className="text-center py-20 text-xl">Loading article...</div>;
+    return (
+      <div className="mx-auto animate-pulse">
+        <Navbar />
+        <div className="max-w-[1680px] mx-auto flex flex-col gap-12 px-6">
+          <div className="h-12 w-1/3 bg-gray-200 rounded my-10" />
+
+          <div className="w-full h-[60px] bg-gray-200 rounded mb-6" />
+          <div className="w-3/4 h-6 bg-gray-200 rounded mb-4" />
+          <div className="w-full h-[500px] bg-gray-200 rounded mb-6" />
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+            <div className="w-full h-[240px] bg-gray-200 rounded" />
+            <div className="md:col-span-3 space-y-4">
+              <div className="h-4 bg-gray-200 rounded w-5/6" />
+              <div className="h-4 bg-gray-200 rounded w-3/4" />
+              <div className="h-4 bg-gray-200 rounded w-2/3" />
+              <div className="h-4 bg-gray-200 rounded w-1/2" />
+              <div className="h-16 bg-gray-200 rounded w-full" />
+            </div>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
   }
 
   if (!article) {
@@ -76,7 +99,7 @@ const MagazinePost = () => {
     <div className="mx-auto">
       <Navbar />
       <div className="max-w-[1680px] mx-auto flex flex-col gap-12 px-6">
-        <div className=" px-6 py-4 flex items-center justify-between">
+        <div className="py-4 flex items-center justify-between">
           <button
             onClick={() => navigate(-1)}
             className="flex items-center gap-2 text-sm font-bold uppercase hover:underline"
@@ -158,14 +181,14 @@ const MagazinePost = () => {
           </aside>
 
           <article className="md:col-span-3 text-base text-gray-800 space-y-6 leading-relaxed">
-            <p className="font-semibold">{article.bold_info1}</p>
-            <p>{article.info1}</p>
-            <p>{article.info2}</p>
-            <p className="font-semibold">{article.bold_info2}</p>
+            <p className="font-semibold break-words">{article.bold_info1}</p>
+            <p className="break-words">{article.info1}</p>
+            <p className="break-words">{article.info2}</p>
+            <p className="font-semibold break-words">{article.bold_info2}</p>
 
-            <blockquote className="border-l-4 border-black pl-6 py-4 text-xl font-semibold italic text-gray-900">
+            <blockquote className="border-l-4 border-black pl-6 py-4 text-xl font-semibold italic text-gray-900 break-words">
               {article.quote}
-              <div className="mt-2 text-sm not-italic text-gray-600">
+              <div className="mt-2 text-sm not-italic text-gray-600 break-words">
                 – {article.quote_author}
               </div>
             </blockquote>

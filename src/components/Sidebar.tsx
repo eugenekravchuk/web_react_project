@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { db } from "../data/firebase";
-import {
-  collection,
-  getDocs,
-} from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { ArticleType } from "../data/types";
 import MagazinCover from "../assets/magazin-cover.png";
 import NewsForm from "./NewsForm";
@@ -35,7 +32,6 @@ const Sidebar = () => {
 
   return (
     <aside className="w-full lg:w-[300px] xl:w-[360px] flex flex-col gap-14 text-sm text-black">
-      {/* PRINTMAGAZINE */}
       <div className="pb-8">
         <h4 className="uppercase text-[14px] tracking-wide text-black mb-1 font-bold">
           Printmagazine
@@ -44,7 +40,6 @@ const Sidebar = () => {
         <img src={MagazinCover} alt="Magazine Cover" className="w-full mb-4" />
       </div>
 
-      {/* RANDOM */}
       <div>
         <h4 className="uppercase text-[16px] tracking-wide text-black mb-5 font-bold">
           RANDOM FOR YOU
@@ -82,7 +77,6 @@ const Sidebar = () => {
         </div>
       </div>
 
-      {/* NEWSLETTER */}
       <div className="bg-gray-100 p-6">
         <h4 className="uppercase text-[16px] tracking-wide text-black font-bold mb-2">
           Newsletter

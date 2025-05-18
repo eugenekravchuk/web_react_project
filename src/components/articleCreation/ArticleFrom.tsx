@@ -34,7 +34,7 @@ export const ArticleForm = ({
         ) : (
           <div>
             <p className="text-2xl font-medium">+</p>
-            <p className="text-lg">Add article photo</p>
+            <p className="text-lg">Click to upload article cover image</p>
           </div>
         )}
         <input
@@ -48,7 +48,7 @@ export const ArticleForm = ({
 
       <input
         type="text"
-        placeholder="Title"
+        placeholder="Enter article title (e.g. 'The Future of Street Art')"
         className="w-full border px-4 py-2 rounded"
         value={articleData.title}
         onChange={(e) =>
@@ -58,7 +58,7 @@ export const ArticleForm = ({
 
       <input
         type="text"
-        placeholder="Description"
+        placeholder="Write a short summary of the article"
         className="w-full border px-4 py-2 rounded"
         value={articleData.description}
         onChange={(e) =>
@@ -88,7 +88,7 @@ export const ArticleForm = ({
         }
       >
         <option value="" disabled>
-          Label
+          Select category/label
         </option>
         {labels.map((label) => (
           <option key={label} value={label}>
@@ -98,7 +98,7 @@ export const ArticleForm = ({
       </select>
 
       <textarea
-        placeholder="Bold Info 1"
+        placeholder="Highlight key message or insight (Bold Info 1)"
         className="w-full border px-4 py-2 rounded"
         value={articleData.bold_info1}
         onChange={(e) =>
@@ -107,7 +107,7 @@ export const ArticleForm = ({
       />
 
       <textarea
-        placeholder="Info 1"
+        placeholder="Expand on the first idea or story section"
         className="w-full border px-4 py-2 rounded"
         value={articleData.info1}
         onChange={(e) =>
@@ -116,7 +116,7 @@ export const ArticleForm = ({
       />
 
       <textarea
-        placeholder="Bold Info 2"
+        placeholder="Another key insight or shift in the narrative (Bold Info 2)"
         className="w-full border px-4 py-2 rounded"
         value={articleData.bold_info2}
         onChange={(e) =>
@@ -125,7 +125,7 @@ export const ArticleForm = ({
       />
 
       <textarea
-        placeholder="Info 2"
+        placeholder="Wrap-up or supporting paragraph for the second idea"
         className="w-full border px-4 py-2 rounded"
         value={articleData.info2}
         onChange={(e) =>
@@ -135,7 +135,7 @@ export const ArticleForm = ({
 
       <input
         type="text"
-        placeholder="Quote"
+        placeholder='Inspirational quote (e.g. "Art is the lie that enables us to realize the truth.")'
         className="w-full border px-4 py-2 rounded"
         value={articleData.quote}
         onChange={(e) =>
@@ -145,7 +145,7 @@ export const ArticleForm = ({
 
       <input
         type="text"
-        placeholder="Quote Author"
+        placeholder="Quote author (e.g. Pablo Picasso)"
         className="w-full border px-4 py-2 rounded"
         value={articleData.quote_author}
         onChange={(e) =>
@@ -155,13 +155,13 @@ export const ArticleForm = ({
 
       <div className="flex gap-4 justify-center">
         <button
-          className="px-6 py-2 border border-black rounded"
+          className="px-6 py-2 border border-black rounded hover:cursor-pointer hover:bg-[#D3D3D3] transition"
           onClick={goBack}
         >
           Back
         </button>
         <button
-          className="bg-black text-white px-6 py-2 rounded font-semibold"
+          className="bg-black text-white px-6 py-2 rounded font-semibold hover:cursor-pointer hover:bg-[#2A2A2A] transition"
           onClick={handleFinish}
         >
           Finish

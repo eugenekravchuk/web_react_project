@@ -14,6 +14,7 @@ interface Article {
 
 const Hero = () => {
   const [article, setArticle] = useState<Article | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchFirstArticle = async () => {
@@ -26,28 +27,43 @@ const Hero = () => {
         }
       } catch (error) {
         console.error("Error fetching hero article:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchFirstArticle();
   }, []);
 
-  if (!article) {
-    return <div className="text-center py-20 text-xl">Loading hero...</div>;
+  if (loading) {
+    return (
+      <section className="px-4 sm:px-6 py-12 max-w-[1680px] mx-auto">
+        <div className="flex flex-col lg:flex-row gap-6 sm:gap-12 mb-10 animate-pulse">
+          <div className="lg:w-1/2 h-[200px] bg-gray-200 rounded" />
+          <div className="lg:w-1/2 space-y-4">
+            <div className="h-6 bg-gray-200 rounded w-3/4" />
+            <div className="h-6 bg-gray-200 rounded w-2/3" />
+            <div className="h-6 bg-gray-200 rounded w-1/2" />
+            <div className="h-10 bg-gray-200 rounded w-1/3 mt-6" />
+          </div>
+        </div>
+        <div className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] bg-gray-200 rounded animate-pulse" />
+      </section>
+    );
   }
 
+  if (!article) return null;
+
   return (
-    <section className="px-6 py-12 max-w-[1680px] mx-auto">
-      <div className="flex flex-col lg:flex-row gap-12 mb-10">
-        {/* Left: Title */}
+    <section className="px-4 sm:px-6 py-12 max-w-[1680px] mx-auto">
+      <div className="flex flex-col lg:flex-row gap-6 sm:gap-12 mb-10">
         <div className="lg:w-1/2 flex items-start">
-          <h1 className="text-[104px] font-extrabold leading-tight tracking-tight">
+          <h1 className="text-4xl sm:text-6xl lg:text-[104px] font-extrabold leading-tight tracking-tight">
             {article.title.toUpperCase()}
           </h1>
         </div>
 
-        {/* Right: Description and Meta */}
-        <div className="lg:w-1/2 flex flex-col justify-between pt-8 text-lg">
+        <div className="lg:w-1/2 flex flex-col justify-between pt-6 sm:pt-8 text-base sm:text-lg">
           <div>
             <p className="text-gray-700">{article.description}</p>
           </div>
@@ -69,11 +85,10 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Image */}
       <img
         src={article.imageSrc}
         alt={article.title}
-        className="w-full h-[600px] object-cover object-center"
+        className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] object-cover object-center"
       />
     </section>
   );

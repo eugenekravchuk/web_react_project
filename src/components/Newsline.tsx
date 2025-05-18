@@ -9,7 +9,7 @@ const Newsline = () => {
     const fetchArticles = async () => {
       try {
         const snapshot = await getDocs(collection(db, "articles"));
-        const fetchedTitles = snapshot.docs.map(doc => doc.data().title);
+        const fetchedTitles = snapshot.docs.map((doc) => doc.data().title);
         setTitles(fetchedTitles);
       } catch (error) {
         console.error("Помилка при завантаженні статей:", error);
@@ -19,24 +19,25 @@ const Newsline = () => {
     fetchArticles();
   }, []);
 
-  const content = titles.length > 0 ? (
-    <>
-      <strong className="mr-6">NEWS TICKER+++</strong>
-      {titles.map((title, idx) => (
-        <span key={idx} className="mr-12">
-          +  {title}  +
-        </span>
-      ))}
-    </>
-  ) : (
-    <>Loading news...</>
-  );
+  const content =
+    titles.length > 0 ? (
+      <>
+        <strong className="mr-6">NEWS TICKER+++</strong>
+        {titles.map((title, idx) => (
+          <span key={idx} className="mr-12">
+            + {title} +
+          </span>
+        ))}
+      </>
+    ) : (
+      <>Loading news...</>
+    );
 
   return (
     <div className="bg-black text-white overflow-hidden whitespace-nowrap py-3 px-5 group">
       <div className="marquee-wrapper flex animate-marquee">
         {content}
-        {content} {/* дублюю для безперервного руху */}
+        {content}
       </div>
     </div>
   );

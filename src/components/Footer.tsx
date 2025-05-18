@@ -14,14 +14,12 @@ const Footer = () => {
   }, [location.search]);
   return (
     <footer className="bg-black text-white text-sm">
-      {/* Top Newsline */}
       <div className="overflow-hidden whitespace-nowrap py-2 font-bold border-t border-b border-white">
         <div className="animate-marquee inline-block marquee-wrapper">
           {Array(20).fill("NEWSLETTER+++").join("   ")}
         </div>
       </div>
 
-      {/* Main Newsletter Section */}
       <div className="max-w-[1680px] mx-auto px-6 py-20 grid md:grid-cols-2 gap-10">
         <div>
           <h2 className="text-6xl md:text-7xl font-extrabold leading-tight">
@@ -34,15 +32,12 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Middle Footer: Logo + Links */}
       <div className="max-w-[1680px] mx-auto px-6 pb-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 border-t border-white/10 pt-10">
-          {/* Left: Logo */}
           <div>
             <div className="text-white font-bold text-2xl">FYRRE MAGAZINE</div>
           </div>
 
-          {/* Center: Navigation */}
           <div className="col-span-3 grid grid-cols-3 gap-8 text-gray-300 mt-10 text-base">
             <ul className="space-y-1">
               <li>
@@ -114,13 +109,10 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom Footer: Copyright + Socials */}
       <div className="max-w-[1680px] mx-auto px-6 pb-10">
         <div className="flex flex-col lg:flex-row justify-between items-center gap-6 border-t border-white/10 pt-6">
-          {/* Copyright */}
           <p className="text-xs text-gray-400"></p>
 
-          {/* Social Icons */}
           <div className="flex gap-4">
             <a href="#" className="hover:opacity-70 transition">
               <img src={Insta} alt="Instagram" className="w-5 h-5" />

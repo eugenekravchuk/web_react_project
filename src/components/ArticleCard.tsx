@@ -26,7 +26,6 @@ const ArticleCard: React.FC<ArticleProps> = ({
       href={`/articles/${slug}`}
       className="group block w-full h-full border border-black-300 bg-white transition duration-300 hover:border-black hover:bg-neutral-50"
     >
-      {/* Header */}
       <div className="flex justify-between items-start px-4 pt-4 mb-4">
         <p className="text-sm text-gray-500">{date}</p>
         <span className="text-xs border border-black px-2 py-0.5 rounded-full">
@@ -34,7 +33,6 @@ const ArticleCard: React.FC<ArticleProps> = ({
         </span>
       </div>
 
-      {/* Image with true zoom-in effect */}
       <div className="px-4 mb-2 overflow-hidden">
         <div className="aspect-[4/3] w-full overflow-hidden rounded-sm">
           <img
@@ -45,7 +43,6 @@ const ArticleCard: React.FC<ArticleProps> = ({
         </div>
       </div>
 
-      {/* Text content */}
       <div className="px-4 pb-6">
         <h2 className="text-2xl font-bold text-black mb-2 group-hover:underline decoration-black/20 underline-offset-4">
           {title}

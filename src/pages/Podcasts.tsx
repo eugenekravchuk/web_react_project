@@ -25,7 +25,9 @@ const Podcasts = () => {
     const fetchPodcasts = async () => {
       try {
         const snapshot = await getDocs(collection(db, "podcasts"));
-        const data = snapshot.docs.map((doc) => doc.data() as Podcast);
+        const data = snapshot.docs
+          .map((doc) => doc.data() as Podcast)
+          .sort((a, b) => Number(a.episode) - Number(b.episode)); // sort descending by episode number
         setPodcasts(data);
         setLoading(false);
       } catch (error) {
@@ -36,31 +38,36 @@ const Podcasts = () => {
     fetchPodcasts();
   }, []);
 
-  if (loading) {
-    return <div className="text-center py-20 text-xl">Loading podcasts...</div>;
-  }
-
   return (
     <div className="mx-auto">
       <Navbar />
       <Header header={PodcastLogo} />
 
-      <div className="max-w-[1680px] mx-auto px-6 py-12 flex flex-col gap-6 mb-40 mt-14">
-        {podcasts.map((podcast) => (
-          <Link
-            key={podcast.episode}
-            to={`/podcasts/${podcast.episode}`}
-            className="block"
-          >
-            <PodcastRow
-              imageSrc={podcast.imageSrc}
-              episode={podcast.episode}
-              title={podcast.title}
-              date={podcast.date}
-              duration={podcast.duration}
-            />
-          </Link>
-        ))}
+      <div className="px-6">
+        <div className="max-w-[1680px] mx-auto flex flex-col gap-6 mb-40 mt-14 border-t-1">
+          {loading
+            ? Array.from({ length: 4 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="h-[160px] w-full bg-gray-200 rounded animate-pulse"
+                />
+              ))
+            : podcasts.map((podcast) => (
+                <Link
+                  key={podcast.episode}
+                  to={`/podcasts/${podcast.episode}`}
+                  className="block"
+                >
+                  <PodcastRow
+                    imageSrc={podcast.imageSrc}
+                    episode={podcast.episode}
+                    title={podcast.title}
+                    date={podcast.date}
+                    duration={podcast.duration}
+                  />
+                </Link>
+              ))}
+        </div>
       </div>
 
       <Footer />

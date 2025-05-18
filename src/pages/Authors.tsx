@@ -13,7 +13,7 @@ interface Author {
   imageSrc: string;
   job: string;
   city: string;
-  id: string
+  id: string;
 }
 
 const Authors = () => {
@@ -35,26 +35,29 @@ const Authors = () => {
     fetchAuthors();
   }, []);
 
-  if (loading) {
-    return <div className="text-center py-20 text-xl">Loading authors...</div>;
-  }
-
   return (
     <div className="mx-auto">
       <Navbar />
       <Header header={AuthorsLogo} />
 
-      <div className="h-[100px]"></div>
+      <div className="h-[100px]" />
 
       <div className="grid grid-cols-1 max-w-[1680px] mx-auto">
-        {authors.map((author, index) => (
-          <div key={index} className="divide-y">
-            <AuthorRow {...author} />
-          </div>
-        ))}
+        {loading
+          ? Array.from({ length: 4 }).map((_, i) => (
+              <div
+                key={i}
+                className="p-6 h-[140px] bg-gray-200 animate-pulse border-b"
+              />
+            ))
+          : authors.map((author, index) => (
+              <div key={index} className="divide-y">
+                <AuthorRow {...author} />
+              </div>
+            ))}
       </div>
 
-      <div className="h-[100px]"></div>
+      <div className="h-[100px]" />
       <Footer />
     </div>
   );

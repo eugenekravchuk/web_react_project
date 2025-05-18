@@ -25,7 +25,6 @@ const Article: React.FC<ArticleProps> = ({
       className="group block transition duration-300 hover:bg-white flex-1 flex flex-col hover: rounded-md"
     >
       <div className="p-6 border-b flex flex-col lg:flex-row gap-6 justify-between min-h-[180px]">
-        {/* Image */}
         <div className="w-40 h-40 overflow-hidden rounded-sm flex-shrink-0">
           <img
             src={imageSrc}
@@ -34,9 +33,7 @@ const Article: React.FC<ArticleProps> = ({
           />
         </div>
 
-        {/* Content */}
         <div className="flex-1 flex flex-col justify-between">
-          {/* Top: Title + Description */}
           <div>
             <h2 className="text-2xl font-semibold text-gray-900 group-hover:underline transition">
               {title}
@@ -46,7 +43,6 @@ const Article: React.FC<ArticleProps> = ({
             </p>
           </div>
 
-          {/* Meta */}
           <div className="pt-4 pb-4 flex flex-wrap items-center text-sm text-gray-800 font-medium gap-x-4 gap-y-2">
             <span>
               <strong className="mr-1">Text</strong> {author}

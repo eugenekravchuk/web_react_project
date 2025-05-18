@@ -17,12 +17,12 @@ const PodcastRow: React.FC<PodcastRowProps> = ({
   duration,
 }) => {
   return (
-    <div className="group flex items-center justify-between border-b py-6 w-full gap-6 transition-colors duration-200">
-      {/* Episode number */}
-      <div className="text-lg font-semibold w-6 text-left">{episode}</div>
+    <div className="group flex flex-col sm:flex-row sm:items-center justify-between border-b py-6 w-full gap-4 sm:gap-6 transition-colors duration-200 cursor-pointer px-4 sm:px-0">
+      <div className="text-base sm:text-lg font-semibold w-full sm:w-6 text-left">
+        {episode}
+      </div>
 
-      {/* Podcast image with zoom-in */}
-      <div className="w-24 h-24 sm:w-28 sm:h-28 shrink-0 overflow-hidden rounded-sm">
+      <div className="w-full sm:w-24 h-24 sm:h-24 shrink-0 overflow-hidden rounded-sm">
         <img
           src={imageSrc}
           alt={`Episode ${episode}`}
@@ -30,22 +30,20 @@ const PodcastRow: React.FC<PodcastRowProps> = ({
         />
       </div>
 
-      {/* Main content */}
-      <div className="flex-1 px-4 sm:px-6">
-        <h3 className="text-lg sm:text-xl font-semibold text-black">
+      <div className="w-full sm:flex-1 sm:px-6">
+        <h3 className="text-base sm:text-xl font-semibold text-black transition-all duration-300 group-hover:underline">
           {title}
         </h3>
       </div>
 
-      {/* Meta info + listen */}
-      <div className="flex flex-col sm:flex-row items-end sm:items-center gap-1 sm:gap-6 text-sm text-black font-medium whitespace-nowrap">
+      <div className="w-full sm:w-auto flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-6 text-sm text-black font-medium whitespace-nowrap mt-2 sm:mt-0">
         <div>
           <span className="font-semibold mr-1">Date</span> {date}
         </div>
         <div>
           <span className="font-semibold mr-1">Duration</span> {duration}
         </div>
-        <div className="flex items-center gap-1 text-xs font-bold uppercase tracking-wide transition-transform duration-300 group-hover:translate-x-1">
+        <div className="flex items-center gap-1 text-xs font-bold uppercase tracking-wide transform transition-transform duration-300 group-hover:translate-x-2">
           Listen
           <ArrowRight size={14} />
         </div>

@@ -3,7 +3,6 @@ import React from "react";
 export const CreateAuthorForm = ({
   photoAuthor,
   handlePhotoAuthorChange,
-  newAuthor,
   setNewAuthor,
   handleCreateAuthor,
   goBack,
@@ -86,13 +85,13 @@ export const CreateAuthorForm = ({
 
         <div className="flex gap-4 mt-4">
           <button
-            className="px-6 py-2 border border-black rounded"
+            className="px-6 py-2 border border-black rounded hover:cursor-pointer hover:bg-[#D3D3D3] transition"
             onClick={goBack}
           >
             Back
           </button>
           <button
-            className="bg-black text-white px-6 py-2 rounded font-semibold"
+            className="bg-black text-white px-6 py-2 rounded font-semibold hover:cursor-pointer hover:bg-[#2A2A2A] transition"
             onClick={handleCreateAuthor}
           >
             Save and Continue

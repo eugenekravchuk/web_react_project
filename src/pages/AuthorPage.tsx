@@ -81,7 +81,43 @@ const AuthorPage = () => {
   }, [author]);
 
   if (loading)
-    return <div className="text-center py-20 text-xl">Loading author...</div>;
+    return (
+      <div className="mx-auto">
+        <Navbar />
+        <div className="max-w-[1680px] mx-auto px-6 py-20 animate-pulse">
+          <div className="h-12 bg-gray-200 w-1/3 mb-10" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="flex flex-col items-center md:items-start">
+              <div className="w-64 h-64 bg-gray-300 rounded-full mb-8" />
+              <div className="h-4 w-32 bg-gray-300 mb-4" />
+              <div className="h-4 w-40 bg-gray-200" />
+            </div>
+            <div className="md:col-span-2 space-y-4">
+              <div className="h-6 bg-gray-200 w-3/4" />
+              <div className="h-4 bg-gray-100 w-full" />
+              <div className="h-4 bg-gray-100 w-5/6" />
+              <div className="h-4 bg-gray-100 w-2/3" />
+            </div>
+          </div>
+          <div className="mt-20 space-y-6">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-6 p-6 border border-black border-opacity-20"
+              >
+                <div className="w-24 h-24 bg-gray-300 rounded" />
+                <div className="flex-1 space-y-2">
+                  <div className="h-4 w-1/2 bg-gray-200" />
+                  <div className="h-3 w-1/4 bg-gray-100" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+
   if (!author)
     return <div className="text-center py-20 text-xl">Author not found</div>;
 
@@ -90,7 +126,7 @@ const AuthorPage = () => {
       <Navbar />
 
       <div className="max-w-[1680px] mx-auto flex flex-col gap-12 px-6">
-        <div className=" px-6 py-4 flex items-center justify-between">
+        <div className="py-4 flex items-center justify-between">
           <button
             onClick={() => navigate(-1)}
             className="flex items-center gap-2 text-sm font-bold uppercase hover:underline"
@@ -152,19 +188,32 @@ const AuthorPage = () => {
           Articles by {author.name}
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 border-black border-opacity-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 ">
           {articles.map((article, idx) => {
-            // const noBottom = idx === 0 || idx === 1;
-            // const noRight = idx === 0 || idx === 2;
+            const isLeft = idx % 2 === 0;
+            const isTopRow = idx < 2;
+            const isLast = idx === articles.length - 1;
+            const isSecondLast = idx === articles.length - 2;
+            const isOdd = articles.length % 2 !== 0;
+
+            const borderT = isTopRow ? "border-t-2" : "border-t-[1px]";
+            const borderL = isLeft ? "border-l-2" : "";
+            const borderR =
+              isLeft && !isLast
+                ? "border-r-[1px]"
+                : isLast && isOdd
+                ? "border-r-2"
+                : !isLeft
+                ? "border-r-2"
+                : "";
+            const borderB =
+              isSecondLast || isLast ? "border-b-2" : "border-b-[1px]";
 
             return (
               <Link
-                to={`/articles/${article.id}`}
                 key={idx}
-                className={`
-                flex items-center gap-6 p-6 border border-black border-opacity-20 transition group
-   
-              `}
+                to={`/articles/${article.id}`}
+                className={`flex items-center gap-6 p-6 transition group border-black border-opacity-20 border ${borderT} ${borderL} ${borderR} ${borderB}`}
               >
                 <img
                   src={article.imageSrc}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../data/firebase";
 
@@ -19,7 +19,7 @@ interface Podcast {
   description: string;
   date: string;
   duration: string;
-  episodeNumber: string;
+  episode: string;
   content: string[];
   quote?: {
     text: string;
@@ -65,7 +65,51 @@ const PodcastPost = () => {
   }, [slug]);
 
   if (loading) {
-    return <div className="text-center py-20 text-xl">Loading podcast...</div>;
+    return (
+      <div className="mx-auto animate-pulse">
+        <Navbar />
+        <div className="max-w-[1680px] mx-auto flex flex-col gap-12 px-6">
+          <div className="px-6 py-4 flex items-center justify-between">
+            <div className="w-32 h-6 bg-gray-200 rounded" />
+            <div className="w-24 h-6 bg-gray-200 rounded" />
+          </div>
+
+          <section className="w-full py-12 bg-white">
+            <div className="flex flex-col md:flex-row justify-between items-start gap-12 max-w-[1680px] mx-auto">
+              <div className="w-full space-y-4">
+                <div className="h-10 bg-gray-200 rounded w-3/4" />
+                <div className="h-6 bg-gray-200 rounded w-1/4" />
+              </div>
+              <div className="w-full space-y-4">
+                <div className="h-4 bg-gray-200 rounded w-full" />
+                <div className="h-4 bg-gray-200 rounded w-5/6" />
+                <div className="h-4 bg-gray-200 rounded w-3/4" />
+              </div>
+            </div>
+          </section>
+
+          <div className="w-full h-[600px] bg-gray-200" />
+
+          <section className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-10">
+            <aside className="w-full max-w-xs p-6 rounded-md bg-white space-y-4">
+              <div className="h-6 bg-gray-200 rounded w-3/4 mx-auto" />
+              <div className="space-y-2">
+                <div className="h-3 bg-gray-200 rounded w-full" />
+                <div className="h-3 bg-gray-200 rounded w-full" />
+                <div className="h-3 bg-gray-200 rounded w-2/3" />
+              </div>
+            </aside>
+            <article className="md:col-span-3 space-y-4">
+              <div className="h-4 bg-gray-200 rounded w-full" />
+              <div className="h-4 bg-gray-200 rounded w-5/6" />
+              <div className="h-4 bg-gray-200 rounded w-3/4" />
+              <div className="h-4 bg-gray-200 rounded w-full" />
+            </article>
+          </section>
+        </div>
+        <Footer />
+      </div>
+    );
   }
 
   if (!podcast) {
@@ -87,7 +131,7 @@ const PodcastPost = () => {
     <div className="mx-auto">
       <Navbar />
       <div className="max-w-[1680px] mx-auto flex flex-col gap-12 px-6">
-        <div className="px-6 py-4 flex items-center justify-between">
+        <div className="py-4 flex items-center justify-between">
           <button
             onClick={() => navigate(-1)}
             className="flex items-center gap-2 text-sm font-bold uppercase hover:underline"
@@ -99,15 +143,15 @@ const PodcastPost = () => {
           </h1>
         </div>
 
-        {/* Hero Section with Podcast Info */}
         <section className="w-full py-12 bg-white">
           <div className="flex flex-col md:flex-row justify-between items-start gap-12 max-w-[1680px] mx-auto">
             <div>
-              <h1 className="text-6xl md:text-7xl font-black leading-tight tracking-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-snug sm:leading-tight tracking-tight">
                 {podcast.title.toUpperCase()}
               </h1>
+
               <div className="mt-4 text-2xl font-bold">
-                EPISODE {podcast.episodeNumber}
+                EPISODE {podcast.episode}
               </div>
             </div>
             <div className="text-black text-base leading-relaxed md:max-w-[50%]">
@@ -145,7 +189,6 @@ const PodcastPost = () => {
           </div>
         </section>
 
-        {/* Podcast Metadata */}
         <div className="flex items-center justify-between flex-wrap gap-4 py-4 px-6">
           <div className="flex flex-wrap gap-x-6 text-sm text-black">
             <span>
@@ -160,12 +203,11 @@ const PodcastPost = () => {
           </div>
           <div>
             <span className="text-xs border border-black px-4 py-1 rounded-full font-medium whitespace-nowrap">
-              EPISODE {podcast.episodeNumber}
+              EPISODE {podcast.episode}
             </span>
           </div>
         </div>
 
-        {/* Podcast Cover Image */}
         <div className="w-full relative">
           <img
             src={podcast.imageSrc || defaultPodcastImage}
@@ -173,11 +215,10 @@ const PodcastPost = () => {
             alt={`Podcast cover for ${podcast.title}`}
           />
           <div className="absolute bottom-6 left-6 text-white text-4xl font-bold">
-            EP {podcast.episodeNumber}
+            EP {podcast.episode}
           </div>
         </div>
 
-        {/* Host Card + Content */}
         <section className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-10">
           <aside className="w-full max-w-xs p-6 rounded-md text-center bg-white">
             <h2 className="text-3xl font-bold">{podcast.host}</h2>

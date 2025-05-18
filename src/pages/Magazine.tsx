@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../data/firebase";
-import { ArticleType, PodcastType, AuthorType } from "../data/types";
+import { ArticleType } from "../data/types";
 
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
@@ -23,10 +23,11 @@ const Magazine = () => {
     const fetchFirestoreData = async () => {
       try {
         const articleSnap = await getDocs(collection(db, "articles"));
-        setArticles(articleSnap.docs.map((doc) => doc.data() as ArticleType));
-        setFilteredArticles(
-          articleSnap.docs.map((doc) => doc.data() as ArticleType)
+        const loadedArticles = articleSnap.docs.map(
+          (doc) => doc.data() as ArticleType
         );
+        setArticles(loadedArticles);
+        setFilteredArticles(loadedArticles);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching Firestore data:", error);
@@ -47,22 +48,12 @@ const Magazine = () => {
     setFilteredArticles(filtered);
   }, [selected, articles]);
 
-  // const filteredArticles =
-  //   selected === "ALL"
-  //     ? articles
-  //     : articles.filter((article) => article.label === selected);
-
-  if (loading) {
-    return <div className="text-center py-20 text-xl">Loading...</div>;
-  }
-
   return (
     <div className="mx-auto">
       <Navbar />
       <Header className="w-full" header={MagazineLogo} />
 
       <div className="max-w-[1680px] mx-auto flex flex-col gap-12 px-6">
-        {/* Categories */}
         <div className="flex justify-end gap-2 flex-wrap mt-10 mb-2">
           {categories.map((cat) => (
             <button
@@ -79,23 +70,32 @@ const Magazine = () => {
           ))}
         </div>
 
-
-        {/* Articles */}
         <div className="flex flex-wrap w-full">
-          {filteredArticles.map((article, index) => (
-            <div key={article.id} className="w-full sm:w-1/2 lg:w-1/3">
-              <ArticleCard
-                imageSrc={article.imageSrc}
-                title={article.title}
-                description={article.description}
-                author={article.author}
-                date={article.date}
-                readTime={article.readTime}
-                label={article.label}
-                slug={article.id}
-              />
-            </div>
-          ))}
+          {loading
+            ? Array.from({ length: 6 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="w-full sm:w-1/2 lg:w-1/3 p-2 animate-pulse"
+                >
+                  <div className="w-full h-[300px] bg-gray-200 rounded mb-4" />
+                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-2" />
+                  <div className="h-4 bg-gray-200 rounded w-1/2" />
+                </div>
+              ))
+            : filteredArticles.map((article) => (
+                <div key={article.id} className="w-full sm:w-1/2 lg:w-1/3">
+                  <ArticleCard
+                    imageSrc={article.imageSrc}
+                    title={article.title}
+                    description={article.description}
+                    author={article.author}
+                    date={article.date}
+                    readTime={article.readTime}
+                    label={article.label}
+                    slug={article.id}
+                  />
+                </div>
+              ))}
         </div>
       </div>
 
