@@ -9,13 +9,11 @@ const Navbar = () => {
 
   return (
     <nav className="border-b px-6 py-4 max-w-[1680px] mx-auto">
-      {/* Top row: Logo and burger */}
       <div className="flex justify-between items-center">
         <Link to="/" className="font-bold text-sm">
           FYRRE MAGAZINE
         </Link>
 
-        {/* Desktop nav */}
         <div className="hidden md:flex gap-6 items-center text-sm text-gray-700">
           <Link to="/create-article">Create Article</Link>
           <Link to="/magazine">Magazine</Link>
@@ -35,7 +33,6 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Burger button */}
         <button
           className="md:hidden text-2xl focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
@@ -45,7 +42,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile menu */}
       {isOpen && (
         <div className="md:hidden mt-4 flex flex-col gap-4 text-sm text-gray-700">
           <Link to="/create-article" onClick={() => setIsOpen(false)}>

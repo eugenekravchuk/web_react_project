@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../data/firebase";
-import { ArticleType, PodcastType, AuthorType } from "../data/types";
-
-import Header from "../components/Header";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import MagazineLogo from "../assets/headers/Magazine.svg";
+import { ArticleType } from "../data/types";
 import { useSearchParams } from "react-router-dom";
-import ArticleCard from "../components/ArticleCard";
+
+const Header = lazy(() => import("../components/Header"));
+const Navbar = lazy(() => import("../components/Navbar"));
+const Footer = lazy(() => import("../components/Footer"));
+const ArticleCard = lazy(() => import("../components/ArticleCard"));
+
+import MagazineLogo from "../assets/headers/Magazine.svg";
 
 const categories = ["ALL", "ART", "STREET ART", "SCULPTURES"];
 
@@ -19,20 +20,21 @@ const Magazine = () => {
   const [articles, setArticles] = useState<ArticleType[]>([]);
   const [filteredArticles, setFilteredArticles] = useState<ArticleType[]>([]);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetchFirestoreData = async () => {
       try {
         const articleSnap = await getDocs(collection(db, "articles"));
-        setArticles(articleSnap.docs.map((doc) => doc.data() as ArticleType));
-        setFilteredArticles(
-          articleSnap.docs.map((doc) => doc.data() as ArticleType)
+        const loadedArticles = articleSnap.docs.map(
+          (doc) => doc.data() as ArticleType
         );
-        setLoading(false);
+        setArticles(loadedArticles);
       } catch (error) {
         console.error("Error fetching Firestore data:", error);
+      } finally {
+        setLoading(false);
       }
     };
-
     fetchFirestoreData();
   }, []);
 
@@ -43,31 +45,25 @@ const Magazine = () => {
         : articles.filter(
             (article) => (article.label || "").toUpperCase() === selected
           );
-
     setFilteredArticles(filtered);
   }, [selected, articles]);
-
-  // const filteredArticles =
-  //   selected === "ALL"
-  //     ? articles
-  //     : articles.filter((article) => article.label === selected);
-
-  if (loading) {
-    return <div className="text-center py-20 text-xl">Loading...</div>;
-  }
 
   return (
     <div className="mx-auto">
       <Navbar />
       <Header header="Magazine" />
+      <Suspense fallback={<div className="h-16" />}>
+        <Navbar />
+        <Header className="w-full" header={MagazineLogo} />
+      </Suspense>
 
-      <div className="max-w-[1680px] mx-auto flex flex-col gap-12 px-6">
-        {/* Categories */}
-        <div className="flex justify-end gap-2 flex-wrap mt-10 mb-2">
+      <main className="max-w-[1680px] mx-auto px-4 sm:px-6 py-12 space-y-12">
+        <div className="flex justify-end gap-2 flex-wrap">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSearchParams({ filter: cat })}
+              aria-pressed={selected === cat}
               className={`px-4 py-1 border rounded-full text-sm transition-all ${
                 selected === cat
                   ? "bg-black text-white"
