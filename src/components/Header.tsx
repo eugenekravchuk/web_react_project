@@ -2,15 +2,14 @@ import React from "react";
 
 type HeaderProps = {
   className?: string;
-  header: string;
+  header: string; // тепер це динамічний текст
 };
 
 const Header: React.FC<HeaderProps> = ({ header, className = "" }) => {
   return (
-    <header className="w-full py-12 flex justify-center">
-      {/* <img src={header} alt="Header logo" /> */}
+    <header className={`w-full py-12 flex justify-center ${className}`}>
       <h1 className="text-[clamp(50px,18vw,300px)] font-extrabold leading-none uppercase">
-        ART & LIFE
+        {header}
       </h1>
     </header>
   );

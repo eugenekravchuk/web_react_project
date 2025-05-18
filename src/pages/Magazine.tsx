@@ -52,10 +52,6 @@ const Magazine = () => {
     <div className="mx-auto">
       <Navbar />
       <Header header="Magazine" />
-      <Suspense fallback={<div className="h-16" />}>
-        <Navbar />
-        <Header className="w-full" header={MagazineLogo} />
-      </Suspense>
 
       <main className="max-w-[1680px] mx-auto px-4 sm:px-6 py-12 space-y-12">
         <div className="flex justify-end gap-2 flex-wrap">
@@ -77,7 +73,7 @@ const Magazine = () => {
 
         {/* Articles */}
         <div className="flex flex-wrap w-full">
-          {filteredArticles.map((article, index) => (
+          {filteredArticles.map((article) => (
             <div key={article.id} className="w-full sm:w-1/2 lg:w-1/3">
               <ArticleCard
                 imageSrc={article.imageSrc}
@@ -92,7 +88,7 @@ const Magazine = () => {
             </div>
           ))}
         </div>
-      </div>
+      </main>
 
       <div className="h-[100px]"></div>
       <Footer />
