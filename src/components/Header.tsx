@@ -2,7 +2,7 @@ import React from "react";
 
 type HeaderProps = {
   className?: string;
-  header: string; // тепер це динамічний текст
+  header: string;
 };
 
 const Header: React.FC<HeaderProps> = ({ header, className = "" }) => {
