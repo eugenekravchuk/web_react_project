@@ -26,9 +26,10 @@ const Authors = () => {
         const snapshot = await getDocs(collection(db, "authors"));
         const authorsData = snapshot.docs.map((doc) => doc.data() as Author);
         setAuthors(authorsData);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching authors:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -40,24 +41,26 @@ const Authors = () => {
       <Navbar />
       <Header header={AuthorsLogo} />
 
-      <div className="h-[100px]" />
+      <main className="px-4 sm:px-6 max-w-[1680px] mx-auto py-16 space-y-8">
+        {loading ? (
+          Array.from({ length: 4 }).map((_, i) => (
+            <div
+              key={i}
+              className="h-[140px] bg-gray-200 animate-pulse border-b"
+              aria-hidden="true"
+            />
+          ))
+        ) : authors.length > 0 ? (
+          authors.map((author) => (
+            <div key={author.id} className="divide-y">
+              <AuthorRow {...author} />
+            </div>
+          ))
+        ) : (
+          <p className="text-center text-gray-500">No authors found.</p>
+        )}
+      </main>
 
-      <div className="grid grid-cols-1 max-w-[1680px] mx-auto">
-        {loading
-          ? Array.from({ length: 4 }).map((_, i) => (
-              <div
-                key={i}
-                className="p-6 h-[140px] bg-gray-200 animate-pulse border-b"
-              />
-            ))
-          : authors.map((author, index) => (
-              <div key={index} className="divide-y">
-                <AuthorRow {...author} />
-              </div>
-            ))}
-      </div>
-
-      <div className="h-[100px]" />
       <Footer />
     </div>
   );

@@ -27,11 +27,12 @@ const Podcasts = () => {
         const snapshot = await getDocs(collection(db, "podcasts"));
         const data = snapshot.docs
           .map((doc) => doc.data() as Podcast)
-          .sort((a, b) => Number(a.episode) - Number(b.episode)); // sort descending by episode number
+          .sort((a, b) => Number(a.episode) - Number(b.episode));
         setPodcasts(data);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching podcasts:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -43,32 +44,38 @@ const Podcasts = () => {
       <Navbar />
       <Header header={PodcastLogo} />
 
-      <div className="px-6">
-        <div className="max-w-[1680px] mx-auto flex flex-col gap-6 mb-40 mt-14 border-t-1">
-          {loading
-            ? Array.from({ length: 4 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="h-[160px] w-full bg-gray-200 rounded animate-pulse"
+      <main className="px-4 sm:px-6">
+        <section className="max-w-[1680px] mx-auto flex flex-col gap-6 mt-12 mb-24 border-t pt-8">
+          {loading ? (
+            Array.from({ length: 4 }).map((_, i) => (
+              <div
+                key={i}
+                className="h-[160px] w-full bg-gray-200 rounded animate-pulse"
+                aria-hidden="true"
+              />
+            ))
+          ) : podcasts.length ? (
+            podcasts.map((podcast) => (
+              <Link
+                key={podcast.episode}
+                to={`/podcasts/${podcast.episode}`}
+                aria-label={`Open podcast episode ${podcast.episode}`}
+                className="block"
+              >
+                <PodcastRow
+                  imageSrc={podcast.imageSrc}
+                  episode={podcast.episode}
+                  title={podcast.title}
+                  date={podcast.date}
+                  duration={podcast.duration}
                 />
-              ))
-            : podcasts.map((podcast) => (
-                <Link
-                  key={podcast.episode}
-                  to={`/podcasts/${podcast.episode}`}
-                  className="block"
-                >
-                  <PodcastRow
-                    imageSrc={podcast.imageSrc}
-                    episode={podcast.episode}
-                    title={podcast.title}
-                    date={podcast.date}
-                    duration={podcast.duration}
-                  />
-                </Link>
-              ))}
-        </div>
-      </div>
+              </Link>
+            ))
+          ) : (
+            <p className="text-center text-gray-500">No podcasts available.</p>
+          )}
+        </section>
+      </main>
 
       <Footer />
     </div>

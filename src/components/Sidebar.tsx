@@ -33,17 +33,17 @@ const Sidebar = () => {
   return (
     <aside className="w-full lg:w-[300px] xl:w-[360px] flex flex-col gap-14 text-sm text-black">
       <div className="pb-8">
-        <h4 className="uppercase text-[14px] tracking-wide text-black mb-1 font-bold">
+        <h2 className="uppercase text-[14px] tracking-wide text-black mb-1 font-bold">
           Printmagazine
-        </h4>
+        </h2>
         <h3 className="text-6xl font-bold mb-4 pb-4">03/2022</h3>
         <img src={MagazinCover} alt="Magazine Cover" className="w-full mb-4" />
       </div>
 
       <div>
-        <h4 className="uppercase text-[16px] tracking-wide text-black mb-5 font-bold">
+        <h2 className="uppercase text-[16px] tracking-wide text-black mb-5 font-bold">
           RANDOM FOR YOU
-        </h4>
+        </h2>
 
         <div className="divide-y divide-black-500">
           {randomArticles.map((article, idx) => (
@@ -78,9 +78,9 @@ const Sidebar = () => {
       </div>
 
       <div className="bg-gray-100 p-6">
-        <h4 className="uppercase text-[16px] tracking-wide text-black font-bold mb-2">
+        <h2 className="uppercase text-[16px] tracking-wide text-black font-bold mb-2">
           Newsletter
-        </h4>
+        </h2>
         <h3 className="text-4xl font-bold mb-4 leading-snug">
           Design News to <br /> your inbox
         </h3>
