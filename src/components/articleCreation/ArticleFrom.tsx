@@ -16,7 +16,7 @@ export const ArticleForm = ({
   handlePhotoArticleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   labels: string[];
   readTimes: string[];
-  handleFinish: () => void;
+  handleFinish: () => void; 
   goBack: () => void;
 }) => {
   return (

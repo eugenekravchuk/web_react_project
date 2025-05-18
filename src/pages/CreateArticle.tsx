@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import ClipLoader from "react-spinners/ClipLoader";
+import { sendArticleToAllUsers } from "../utils/sendArticleToAllUsers";
+import emailjs from "emailjs-com";
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -138,8 +140,8 @@ const CreateArticle = () => {
       setLoading(false);
     }
   };
-
   const handleFinish = async () => {
+    emailjs.init("RV60k2-86zcYbljzp"); 
     if (!validateArticle())
       return toast.error("Please complete all article fields.");
 
@@ -152,14 +154,24 @@ const CreateArticle = () => {
         ? `https://res.cloudinary.com/dwcbm3x3w/image/upload/v1747504771/${imageId}`
         : "";
 
+      const articleId = Date.now().toString();
+
       await addDoc(collection(db, "articles"), {
         ...articleData,
         imageSrc: imageUrl,
-        id: Date.now(),
+        id: articleId,
         author: selectedAuthor,
+        createdAt: new Date(),
+      });
+      console.log("📬 Triggering sendArticleToAllUsers");
+
+      await sendArticleToAllUsers({
+        id: articleId,
+        title: articleData.title,
+        description: articleData.description,
       });
 
-      toast.success("Article submitted successfully.");
+      toast.success("Article submitted and newsletter sent!");
       navigate("/magazine");
     } catch {
       toast.error("Article submission failed.");

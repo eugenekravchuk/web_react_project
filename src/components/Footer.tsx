@@ -114,14 +114,32 @@ const Footer = () => {
           <p className="text-xs text-gray-400"></p>
 
           <div className="flex gap-4">
-            <a href="#" className="hover:opacity-70 transition">
-              <img src={Insta} alt="Instagram" className="w-5 h-5" />
+            <a
+              href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
+                window.location.href
+              )}&text=Check this out!`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Share on Twitter"
+            >
+              <img src={Twitter} alt="Twitter" className="w-6 h-6" />
             </a>
-            <a href="#" className="hover:opacity-70 transition">
-              <img src={Twitter} alt="Twitter" className="w-5 h-5" />
+
+            <a
+              href="https://www.instagram.com/mystetstvo.lviv?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Instagram"
+            >
+              <img src={Insta} alt="Instagram" className="w-6 h-6" />
             </a>
-            <a href="#" className="hover:opacity-70 transition">
-              <img src={YouTube} alt="YouTube" className="w-5 h-5" />
+            <a
+              href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Watch on YouTube"
+            >
+              <img src={YouTube} alt="YouTube" className="w-6 h-6" />
             </a>
           </div>
         </div>

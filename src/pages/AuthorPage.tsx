@@ -147,15 +147,47 @@ const AuthorPage = () => {
 
           <div className="w-full flex items-center justify-between border-t pt-4">
             <p className="font-bold text-sm tracking-wide">FOLLOW</p>
-            <div className="flex items-center gap-4 text-zinc-700">
-              <a href="#" aria-label="Instagram">
-                <img src={Insta} alt="Instagram" className="h-5" />
+            <div className="flex items-center gap-4">
+              <a
+                onClick={() =>
+                  alert(
+                    "Вибачте, посилання були в дизайні. Але ця людина не має соцмереж."
+                  )
+                }
+                className="cursor-pointer"
+                aria-label="Instagram"
+              >
+                <img
+                  src={Insta}
+                  alt="Instagram"
+                  className="h-5 opacity-70 hover:opacity-100 transition"
+                />
               </a>
-              <a href="#" aria-label="YouTube">
-                <img src={YouTube} alt="YouTube" className="h-5" />
+              <a
+                onClick={() =>
+                  alert("Це мала бути ютуб-зірка... але вона медитує офлайн.")
+                }
+                className="cursor-pointer"
+                aria-label="YouTube"
+              >
+                <img
+                  src={YouTube}
+                  alt="YouTube"
+                  className="h-5 opacity-70 hover:opacity-100 transition"
+                />
               </a>
-              <a href="#" aria-label="Twitter">
-                <img src={Twitter} alt="Twitter" className="h-5" />
+              <a
+                onClick={() =>
+                  alert("Twitter? Вона просто мовчить. Красиво мовчить.")
+                }
+                className="cursor-pointer"
+                aria-label="Twitter"
+              >
+                <img
+                  src={Twitter}
+                  alt="Twitter"
+                  className="h-5 opacity-70 hover:opacity-100 transition"
+                />
               </a>
             </div>
           </div>

@@ -117,51 +117,33 @@ const PodcastPost = () => {
           <div className="text-base md:w-1/2 text-gray-800 leading-relaxed break-words">
             <p>{podcast.bold_info1}</p>
             <div className="mt-4 flex gap-4">
-              {podcast.soundcloud && (
-                <a
-                  href={podcast.soundcloud}
-                  aria-label="SoundCloud"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img
-                    src={YouTube}
-                    alt="SoundCloud"
-                    className="h-6"
-                    loading="lazy"
-                  />
-                </a>
-              )}
-              {podcast.apple && (
-                <a
-                  href={podcast.apple}
-                  aria-label="Apple Podcasts"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img
-                    src={Insta}
-                    alt="Apple Podcasts"
-                    className="h-6"
-                    loading="lazy"
-                  />
-                </a>
-              )}
-              {podcast.spotify && (
-                <a
-                  href={podcast.spotify}
-                  aria-label="Spotify"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img
-                    src={Twitter}
-                    alt="Spotify"
-                    className="h-6"
-                    loading="lazy"
-                  />
-                </a>
-              )}
+              <a
+                href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
+                  window.location.href
+                )}&text=Check this out!`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Share on Twitter"
+              >
+                <img src={Twitter} alt="Twitter" className="w-6 h-6" />
+              </a>
+
+              <a
+                href="https://www.instagram.com/mystetstvo.lviv?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open Instagram"
+              >
+                <img src={Insta} alt="Instagram" className="w-6 h-6" />
+              </a>
+              <a
+                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Watch on YouTube"
+              >
+                <img src={YouTube} alt="YouTube" className="w-6 h-6" />
+              </a>
             </div>
           </div>
         </section>
