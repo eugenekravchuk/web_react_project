@@ -137,7 +137,6 @@ const AuthorPage = () => {
       </div>
 
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
-        {/* Profile */}
         <div className="flex flex-col items-center md:items-start">
           <img
             src={author.imageSrc}
@@ -162,7 +161,6 @@ const AuthorPage = () => {
           </div>
         </div>
 
-        {/* Bio */}
         <div className="md:col-span-2">
           <h1 className="text-4xl sm:text-5xl font-extrabold mb-6">
             {author.name}
@@ -209,7 +207,7 @@ const AuthorPage = () => {
                 className={`flex items-center gap-6 p-6 transition group border-black border-opacity-20 border ${borderT} ${borderL} ${borderR} ${borderB}`}
               >
                 <img
-                  src={article.imageSrc}
+                  src={article.imageSrc || "/placeholder.webp"}
                   alt={article.title}
                   loading="lazy"
                   className="w-24 h-24 object-cover rounded"

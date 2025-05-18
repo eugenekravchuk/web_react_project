@@ -36,9 +36,13 @@ const ArticleCard: React.FC<ArticleProps> = ({
       <div className="px-4 mb-2 overflow-hidden">
         <div className="aspect-[4/3] w-full overflow-hidden rounded-sm">
           <img
-            src={imageSrc}
+            src={imageSrc || "/placeholder.webp"}
             alt={`Image for ${title}`}
             className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-102"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = "/placeholder.webp";
+            }}
           />
         </div>
       </div>

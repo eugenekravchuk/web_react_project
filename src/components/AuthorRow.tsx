@@ -26,12 +26,17 @@ const AuthorRow: React.FC<AuthorRowProps> = ({
         <div className="flex items-center gap-4">
           <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden">
             <img
-              src={imageSrc}
+              src={imageSrc || "/default-avatar.png"}
               alt={name}
               className="w-full h-full object-cover transition-transform duration-300 transform-gpu group-hover:scale-105"
               style={{ willChange: "transform" }}
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = "/default-avatar.jpg";
+              }}
             />
           </div>
+
           <span className="text-base sm:text-lg font-semibold text-black transition-all duration-200 group-hover:underline">
             {name}
           </span>

@@ -88,7 +88,8 @@ const Hero = () => {
       <img
         src={article.imageSrc}
         alt={article.title}
-        className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] object-cover object-center"
+        height={300}
+        className="w-full sm:h-[400px] md:h-[500px] lg:h-[600px] object-cover object-center"
       />
     </section>
   );
