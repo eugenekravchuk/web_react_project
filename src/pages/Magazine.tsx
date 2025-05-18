@@ -50,10 +50,8 @@ const Magazine = () => {
 
   return (
     <div className="mx-auto">
-      <Suspense fallback={<div className="h-16" />}>
-        <Navbar />
-        <Header className="w-full" header={MagazineLogo} />
-      </Suspense>
+      <Navbar />
+      <Header header="Magazine" />
 
       <main className="max-w-[1680px] mx-auto px-4 sm:px-6 py-12 space-y-12">
         <div className="flex justify-end gap-2 flex-wrap">
@@ -73,42 +71,27 @@ const Magazine = () => {
           ))}
         </div>
 
-        <section
-          aria-label="Articles"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-        >
-          {loading
-            ? Array.from({ length: 6 }).map((_, index) => (
-                <div
-                  key={index}
-                  className="animate-pulse space-y-3"
-                  aria-hidden="true"
-                >
-                  <div className="w-full aspect-[4/3] bg-gray-200 rounded" />
-                  <div className="h-4 bg-gray-200 rounded w-3/4" />
-                  <div className="h-4 bg-gray-200 rounded w-1/2" />
-                </div>
-              ))
-            : filteredArticles.map((article) => (
-                <Suspense key={article.id} fallback={<div className="h-40" />}>
-                  <ArticleCard
-                    imageSrc={article.imageSrc}
-                    title={article.title}
-                    description={article.description}
-                    author={article.author}
-                    date={article.date}
-                    readTime={article.readTime}
-                    label={article.label}
-                    slug={article.id}
-                  />
-                </Suspense>
-              ))}
-        </section>
+        {/* Articles */}
+        <div className="flex flex-wrap w-full">
+          {filteredArticles.map((article) => (
+            <div key={article.id} className="w-full sm:w-1/2 lg:w-1/3">
+              <ArticleCard
+                imageSrc={article.imageSrc}
+                title={article.title}
+                description={article.description}
+                author={article.author}
+                date={article.date}
+                readTime={article.readTime}
+                label={article.label}
+                slug={article.id}
+              />
+            </div>
+          ))}
+        </div>
       </main>
 
-      <Suspense fallback={<div className="h-16" />}>
-        <Footer />
-      </Suspense>
+      <div className="h-[100px]"></div>
+      <Footer />
     </div>
   );
 };

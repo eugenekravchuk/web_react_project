@@ -42,7 +42,7 @@ const Podcasts = () => {
   return (
     <div className="mx-auto">
       <Navbar />
-      <Header header={PodcastLogo} />
+      <Header header="PODCASTS" />
 
       <main className="px-4 sm:px-6">
         <section className="max-w-[1680px] mx-auto flex flex-col gap-6 mt-12 mb-24 border-t pt-8">

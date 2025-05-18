@@ -39,7 +39,7 @@ const Authors = () => {
   return (
     <div className="mx-auto">
       <Navbar />
-      <Header header={AuthorsLogo} />
+      <Header header="AUTHORS" />
 
       <main className="px-4 sm:px-6 max-w-[1680px] mx-auto py-16 space-y-8">
         {loading ? (

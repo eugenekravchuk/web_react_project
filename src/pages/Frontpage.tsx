@@ -85,7 +85,7 @@ const Frontpage = () => {
   return (
     <div className="mx-auto">
       <Navbar />
-      <Header header={ArtLogo} />
+      <Header header="ART & LIFE" />
       <Newsline />
       <Suspense
         fallback={<div className="h-[200px] bg-gray-100 animate-pulse" />}
