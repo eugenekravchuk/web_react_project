@@ -6,7 +6,6 @@ import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import AuthorRow from "../components/AuthorRow";
-import AuthorsLogo from "../assets/headers/Authors.svg";
 
 interface Author {
   name: string;

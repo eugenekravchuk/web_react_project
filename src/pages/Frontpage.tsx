@@ -7,7 +7,6 @@ import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 import Newsline from "../components/Newsline";
 import { Link } from "react-router-dom";
-import ArtLogo from "../assets/headers/Art.svg";
 
 const Hero = lazy(() => import("../components/Hero"));
 const Sidebar = lazy(() => import("../components/Sidebar"));

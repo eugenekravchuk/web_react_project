@@ -1,4 +1,4 @@
-import { useEffect, useState, lazy, Suspense } from "react";
+import { useEffect, useState, lazy } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../data/firebase";
 import { ArticleType } from "../data/types";
@@ -69,22 +69,33 @@ const Magazine = () => {
           ))}
         </div>
 
-        {/* Articles */}
         <div className="flex flex-wrap w-full">
-          {filteredArticles.map((article) => (
-            <div key={article.id} className="w-full sm:w-1/2 lg:w-1/3">
-              <ArticleCard
-                imageSrc={article.imageSrc}
-                title={article.title}
-                description={article.description}
-                author={article.author}
-                date={article.date}
-                readTime={article.readTime}
-                label={article.label}
-                slug={article.id}
-              />
-            </div>
-          ))}
+          {loading
+            ? Array.from({ length: 6 }).map((_, idx) => (
+                <div
+                  key={idx}
+                  className="w-full sm:w-1/2 lg:w-1/3 p-4 animate-pulse"
+                >
+                  <div className="w-full h-48 bg-zinc-300 rounded mb-4"></div>
+                  <div className="h-4 bg-zinc-300 rounded w-3/4 mb-2"></div>
+                  <div className="h-4 bg-zinc-200 rounded w-1/2 mb-1"></div>
+                  <div className="h-3 bg-zinc-200 rounded w-2/3"></div>
+                </div>
+              ))
+            : filteredArticles.map((article) => (
+                <div key={article.id} className="w-full sm:w-1/2 lg:w-1/3">
+                  <ArticleCard
+                    imageSrc={article.imageSrc}
+                    title={article.title}
+                    description={article.description}
+                    author={article.author}
+                    date={article.date}
+                    readTime={article.readTime}
+                    label={article.label}
+                    slug={article.id}
+                  />
+                </div>
+              ))}
         </div>
       </main>
 

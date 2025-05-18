@@ -5,7 +5,6 @@ import { db } from "../data/firebase";
 import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import PodcastLogo from "../assets/headers/Podcast.svg";
 import PodcastRow from "../components/PodcastRow";
 import { Link } from "react-router-dom";
 
