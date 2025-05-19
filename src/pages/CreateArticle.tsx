@@ -163,7 +163,7 @@ const CreateArticle = () => {
         author: selectedAuthor,
         createdAt: new Date(),
       });
-      console.log("📬 Triggering sendArticleToAllUsers");
+      console.log("Triggering sendArticleToAllUsers");
 
       await sendArticleToAllUsers({
         id: articleId,

@@ -3,7 +3,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../data/firebase";
 
 export const sendArticleToAllUsers = async ({ id, title, description }) => {
-    console.log("📩 START sending newsletter");
+    console.log("START sending newsletter");
   
     try {
       const usersSnap = await getDocs(collection(db, "subscribers"));
@@ -11,7 +11,7 @@ export const sendArticleToAllUsers = async ({ id, title, description }) => {
         .map((doc) => doc.data()?.email)
         .filter((email) => typeof email === "string");
   
-      console.log("✅ Emails to send:", emails);
+      console.log("Emails to send:", emails);
   
       const sendTasks = emails.map((email) =>
         emailjs.send(
@@ -28,9 +28,9 @@ export const sendArticleToAllUsers = async ({ id, title, description }) => {
       );
   
       await Promise.all(sendTasks);
-      console.log("✅ All emails sent");
+      console.log("All emails sent");
     } catch (err) {
-      console.error("❌ Failed to send emails:", err);
+      console.error("Failed to send emails:", err);
     }
   };
   

@@ -1,7 +1,7 @@
 export const uploadToCloudinary = async (file: File): Promise<string> => {
   const formData = new FormData();
   formData.append("file", file);
-  formData.append("upload_preset", "ml_default"); // <- your real unsigned preset
+  formData.append("upload_preset", "ml_default");
 
   const res = await fetch(
     "https://api.cloudinary.com/v1_1/dwcbm3x3w/image/upload/",
@@ -18,5 +18,5 @@ export const uploadToCloudinary = async (file: File): Promise<string> => {
     throw new Error(data.error?.message || "Upload failed");
   }
 
-  return data.public_id; // or `data.secure_url` if you don’t plan to use Cloudinary SDK
+  return data.public_id;
 };
