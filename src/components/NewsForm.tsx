@@ -41,7 +41,7 @@ const NewsletterForm = () => {
       alert("Дякуємо! Ми надіслали вам листа.");
       setEmail("");
     } catch (error) {
-      console.error("❌ EmailJS error:", error);
+      console.error("EmailJS error:", error);
       alert("Щось пішло не так. Спробуйте ще раз.");
     } finally {
       setLoading(false);
