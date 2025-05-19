@@ -70,4 +70,4 @@ npm run dev
 
 ## 📄 License
 
-MIT © 2025 FurryMagazine by [Your Name or Team]
+MIT © 2025 FurryMagazine by Lida & Eugene
