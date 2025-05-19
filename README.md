@@ -1,4 +1,4 @@
-# 🐾 FyrrtMagazine
+# 🐾 FyrreMagazine
 
 A modern, community-driven online magazine for creative souls — featuring curated articles, original podcasts, beloved authors, and more. Built with **React**, **Firebase**, and **EmailJS**, FurryMagazine is designed to be dynamic, responsive, and content-rich.
 
