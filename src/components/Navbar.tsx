@@ -21,14 +21,32 @@ const Navbar = () => {
           <Link to="/podcasts">Podcasts</Link>
           <span className="text-gray-400">—</span>
           <div className="flex gap-4 text-xl">
-            <a href="#" aria-label="Instagram">
-              <img src={Insta} alt="Instagram" />
+            <a
+              href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
+                window.location.href
+              )}&text=Check this out!`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Share on Twitter"
+            >
+              <img src={Twitter} alt="Twitter" className="w-6 h-6" />
             </a>
-            <a href="#" aria-label="YouTube">
-              <img src={YouTube} alt="YouTube" />
+
+            <a
+              href="https://www.instagram.com/mystetstvo.lviv?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Instagram"
+            >
+              <img src={Insta} alt="Instagram" className="w-6 h-6" />
             </a>
-            <a href="#" aria-label="Twitter">
-              <img src={Twitter} alt="Twitter" />
+            <a
+              href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Watch on YouTube"
+            >
+              <img src={YouTube} alt="YouTube" className="w-6 h-6" />
             </a>
           </div>
         </div>
@@ -57,14 +75,32 @@ const Navbar = () => {
             Podcasts
           </Link>
           <div className="flex gap-4 pt-2 border-t">
-            <a href="#" aria-label="Instagram">
-              <img src={Insta} alt="Instagram" />
+            <a
+              href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
+                window.location.href
+              )}&text=Check this out!`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Share on Twitter"
+            >
+              <img src={Twitter} alt="Twitter" className="w-6 h-6" />
             </a>
-            <a href="#" aria-label="YouTube">
-              <img src={YouTube} alt="YouTube" />
+
+            <a
+              href="https://www.instagram.com/mystetstvo.lviv?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Instagram"
+            >
+              <img src={Insta} alt="Instagram" className="w-6 h-6" />
             </a>
-            <a href="#" aria-label="Twitter">
-              <img src={Twitter} alt="Twitter" />
+            <a
+              href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Watch on YouTube"
+            >
+              <img src={YouTube} alt="YouTube" className="w-6 h-6" />
             </a>
           </div>
         </div>
