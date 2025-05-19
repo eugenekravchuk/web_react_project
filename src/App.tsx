@@ -8,6 +8,7 @@ import Authors from "./pages/Authors";
 import AuthorPage from "./pages/AuthorPage";
 import CreateArticle from "./pages/CreateArticle";
 import { ToastContainer } from "react-toastify";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/authors" element={<Authors />} />
           <Route path="/authors/:slug" element={<AuthorPage />} />
           <Route path="/create-article" element={<CreateArticle />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </>
